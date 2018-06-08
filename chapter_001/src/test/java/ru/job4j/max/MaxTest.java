@@ -32,4 +32,13 @@ public class MaxTest {
         int result = max.max(2, 1);
         assertThat(result, is(2));
     }
+
+    /**
+     * Test for (third > first > second).
+     */
+    @Test
+    public void whenThirdIsBiggest() {
+        Max max = new Max();
+        assertThat(max.maxOfThree(67, 89, 900), is(900));
+    }
 }
