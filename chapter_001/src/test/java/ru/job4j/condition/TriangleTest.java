@@ -1,0 +1,27 @@
+package ru.job4j.condition;
+
+import org.junit.Test;
+import static org.hamcrest.number.IsCloseTo.closeTo;
+import static org.junit.Assert.*;
+
+/**
+ * @author Dmitrii Eskov (dmitryhope@yahoo.com)
+ * @version 1.0
+ * @since 07.06.2018
+ */
+public class TriangleTest {
+
+    /**
+     * Test for calculating an area of a triangle.
+     */
+    @Test
+    public void whenAreaSetThreePointsThenTriangleArea() {
+        Point a = new Point(0, 0);
+        Point b = new Point(0, 2);
+        Point c = new Point(2, 0);
+        Triangle triangle = new Triangle(a, b, c);
+        double result = triangle.area();
+        double expected = 2D;
+        assertThat(result, closeTo(expected, 0.1));
+    }
+}
