@@ -1,5 +1,5 @@
 /**
- * Test for Counter.
+ * Test for Counter and Factorial.
  *
  * @author Dmitrii Eskov dmitryhope@yahoo.com
  * @version 1.0
