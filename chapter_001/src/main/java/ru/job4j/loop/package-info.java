@@ -1,5 +1,5 @@
 /**
- * Calculating a sum of even numbers from an interval and a factorial.
+ * Calculating a sum of even numbers from an interval, a factorial. Making a Board.
  *
  * @author Dmitrii Eskov dmitryhope@yahoo.com
  * @version 1.0
