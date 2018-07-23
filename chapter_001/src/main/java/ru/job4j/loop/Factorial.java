@@ -8,17 +8,18 @@ package ru.job4j.loop;
  * @since 19.07.2018
  */
 public class Factorial {
-    private int result = 1;
 
     /**
      * Calculating a factorial.
+     *
      * @param n - factorial
      * @return factorial
      */
     public int calc(int n) {
+        int sum = 1;
         for (int index = 1; index <= n; index++) {
-            this.result = this.result * index;
+            sum *= index;
         }
-        return this.result;
+        return sum;
     }
 }
