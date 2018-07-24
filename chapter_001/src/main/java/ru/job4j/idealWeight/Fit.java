@@ -4,6 +4,7 @@ package ru.job4j.idealweight;
  * Programme for calculating ideal weight (men and women).
  */
 public class Fit {
+
     /**
      * Ideal weight for men and women.
      * @param height - рост

@@ -14,6 +14,7 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class CalculateTest {
+
     /**
      * Test echo.
      */
@@ -21,7 +22,7 @@ public class CalculateTest {
     public void whenTakeNameThenTreeEchoPlusName() {
         String input = "Dmitrii Eskov";
         String expect = "Echo, echo, echo: Dmitrii Eskov";
-        Calculate calc = new Calculate();
+        ru.job4j.Calculate calc = new ru.job4j.Calculate();
         String result = calc.echo(input);
         assertThat(result, is(expect));
     }
