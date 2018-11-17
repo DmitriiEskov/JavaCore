@@ -1,5 +1,5 @@
 /**
- * Package for tests of the following tasks: Square, FindLoop.
+ * Package for tests of the following tasks: Square, FindLoop, Turn.
  *
  * @author Dmitrii Eskov (eskovdmi@gmail.com)
  * @version $Id$
