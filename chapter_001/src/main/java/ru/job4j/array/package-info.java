@@ -1,5 +1,5 @@
 /**
- * Package for tasks: Square, FindLoop.
+ * Package for tasks: Square, FindLoop, Turn.
  *
  * @author Dmitrii Eskov (eskovdmi@gmail.com)
  * @version $Id$
