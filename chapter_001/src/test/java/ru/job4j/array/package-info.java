@@ -1,5 +1,5 @@
 /**
- * Package for tests of the following tasks: Square, FindLoop, Turn, Check, ArrayChar, BubbleSort, Matrix, MatrixCheck.
+ * Package for tests of the following tasks: Square, FindLoop, Turn, Check, ArrayChar, BubbleSort, Matrix, MatrixCheck and ArrayDuplicate.
  *
  * @author Dmitrii Eskov (eskovdmi@gmail.com)
  * @version $Id$
