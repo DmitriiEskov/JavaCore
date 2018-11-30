@@ -1,7 +1,7 @@
 package ru.job4j.loop;
 
 /**
- * Factorial.
+ * Class for calculating a factorial.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0
@@ -11,7 +11,6 @@ public class Factorial {
 
     /**
      * Calculating a factorial.
-     *
      * @param n - factorial
      * @return factorial
      */

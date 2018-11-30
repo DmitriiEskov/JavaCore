@@ -6,6 +6,10 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Test for Counter class.
+ *
+ * @author Dmitrii Eskov (dmitryhope@yahoo.com)
+ * @version $Id$
+ * @since 21.07.2018
  */
 public class CounterTest {
 

@@ -1,5 +1,5 @@
 /**
- * Converter
+ * Converter.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0

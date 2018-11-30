@@ -5,7 +5,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Test for Board.
+ * Test for Board class.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version $Id$

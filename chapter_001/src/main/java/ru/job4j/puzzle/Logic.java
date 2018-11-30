@@ -71,13 +71,13 @@ public class Logic {
         boolean result = false;
         for (int i = 0; i < table.length; i++) {
             if (table[i][0] == 1 || table[0][i] == 1) {
-                int horizontalSum = table[i][0];
-                int verticalSum = table[0][i];
+                int horizontal = table[i][0];
+                int vertical = table[0][i];
                 for (int j = 1; j < table.length; j++) {
-                    horizontalSum = horizontalSum + table[i][j];
-                    verticalSum = verticalSum + table[j][i];
+                    horizontal = horizontal + table[i][j];
+                    vertical = vertical + table[j][i];
                 }
-                if (horizontalSum == table.length || verticalSum == table.length) {
+                if (horizontal == table.length || vertical == table.length) {
                     result = true;
                     break;
                 }

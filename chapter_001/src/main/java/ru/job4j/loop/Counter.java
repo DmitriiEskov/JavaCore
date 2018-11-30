@@ -1,7 +1,7 @@
 package ru.job4j.loop;
 
 /**
- * Counter.
+ * Class for calculating a sum of even numbers from an interval.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0
@@ -11,7 +11,6 @@ public class Counter {
 
     /**
      * Calculating a sum of even numbers from an interval.
-     *
      * @param start - start of an interval
      * @param finish - end of an interval
      * @return sum - sum of even numbers

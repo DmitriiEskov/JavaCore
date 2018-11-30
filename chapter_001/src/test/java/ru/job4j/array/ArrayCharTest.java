@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 public class ArrayCharTest {
 
     /**
-     * Testing if 'Hel' is the beginning of 'Hello'
+     * Testing if 'Hel' is the beginning of 'Hello'.
      */
     @Test
     public void whenStartWithPrefixThenTrue() {
@@ -24,7 +24,7 @@ public class ArrayCharTest {
     }
 
     /**
-     * Testing if 'Hi' is the beginning of 'Hello'
+     * Testing if 'Hi' is the beginning of 'Hello'.
      */
     @Test
     public void whenNotStartWithPrefixThenFalse() {

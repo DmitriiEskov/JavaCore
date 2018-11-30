@@ -3,11 +3,11 @@ package ru.job4j.loop;
 import java.util.function.BiPredicate;
 
 /**
- * A paint of pyramids in a pseudograph.
+ * Class for making a paint of pyramids in a pseudograph.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @since 28.07.2018
- * @version 1.0.
+ * @version 1.0
  */
 public class Paint {
     public String rightTrl(int height) {

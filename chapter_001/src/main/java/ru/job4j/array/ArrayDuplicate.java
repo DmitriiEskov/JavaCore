@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class ArrayDuplicate {
 
     /**
-     * Removing duplicates in an array
+     * Removing duplicates in an array.
      * @param array - an array with duplicates
      * @return array - the array without duplicates
      */

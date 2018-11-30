@@ -1,7 +1,7 @@
 package ru.job4j.max;
 
 /**
- * Max of numbers.
+ * Class for finding a maximum of some numbers.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0

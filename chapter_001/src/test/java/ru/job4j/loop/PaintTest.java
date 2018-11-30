@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 /**
+ * Test for Paint class.
+ *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version $Id$
  * @since 0.1
