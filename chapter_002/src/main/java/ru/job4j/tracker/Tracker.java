@@ -60,8 +60,8 @@ public class Tracker {
      * @return Item[] - the array with all items created
      */
     public Item[] getAll() {
-        Item[] result = new Item[position];
-        for (int index = 0; index != position; index++) {
+        Item[] result = new Item[this.position];
+        for (int index = 0; index != this.position; index++) {
             result[index] = this.items[index];
         }
         return result;
@@ -72,27 +72,34 @@ public class Tracker {
      * @param id - id of the item to be replaced
      * @param item - the item to be replaced
      */
-    public void replace(String id, Item item) {
-        for (int i = 0; i != position; i++) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
+        for (int i = 0; i != this.position; i++) {
             if (this.items[i].getId().equals(id)) {
                 this.items[i] = item;
+                result = true;
                 break;
             }
         }
+        return result;
     }
 
     /**
      * Deletes an item inside items array.
      * @param id - the item to be deleted
      */
-    public void delete(String id) {
-        for (int index = 0; index < position; index++) {
+    public boolean delete(String id) {
+        boolean result = false;
+        for (int index = 0; index < this.position; index++) {
             if (this.items[index].getId().equals(id)) {
                 System.arraycopy(this.items, index + 1, this.items, index, this.position - index - 1);
                 this.items[index + this.position - index - 1] = null;
+                --this.position;
+                result = true;
                 break;
             }
         }
+        return result;
     }
 
     /**
@@ -100,37 +107,22 @@ public class Tracker {
      * @return result - the array without null values
      */
     public Item[] findAll() {
-        int i = 0;
-        for (int j = 0; j < this.position; j++) {
-            if (this.items[j] == null) {
-                i++;
-            }
-        }
-        Item[] result = new Item[this.position - i];
-        System.arraycopy(this.items, 0, result, 0, this.position - i);
-        return result;
+        return Arrays.copyOf(this.items, this.position);
     }
 
     /**
-     * Finds a necessary name of items in the items array and returns a new array filled in with suitable items.
-     * @param key - the necessary name of an item
+     * Finds a required name of items in the items array and returns a new array filled in with suitable items.
+     * @param key - the required name of an item
      * @return result - an array filled in with items containing required names
      */
     public Item[] findByName(String key) {
-        Item[] buffer = new Item[position];
+        Item[] result = new Item[this.position];
         int i = 0;
         for (int index = 0; index < this.position; index++) {
             if (this.items[index].getName().equals(key)) {
-                buffer[i] = this.items[index];
-                i++;
+                result[i++] = this.items[index];
             }
         }
-        Item[] result = new Item[i];
-        if (i != 0) {
-            System.arraycopy(buffer, 0, result, 0, i);
-        } else {
-            result = null;
-        }
-        return result;
+        return Arrays.copyOf(result, i);
     }
 }

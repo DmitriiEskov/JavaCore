@@ -19,30 +19,41 @@ public class TrackerTest {
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test1", "testDescription", 123L);
+        Item item = new Item("test1", "testDescription");
         tracker.add(item);
         assertThat(tracker.findAll()[0], is(item));
     }
 
     /**
-     * Changes the item.
+     * Changes the item successfully.
      */
     @Test
-    public void whenReplaceNameThenReturnNewName() {
+    public void whenReplaceNameIsSuccessfulThenTrue() {
         Tracker tracker = new Tracker();
-        Item previous = new Item("test1", "testDescription", 123L);
+        Item previous = new Item("test1", "testDescription");
         tracker.add(previous);
-        Item next = new Item("test2", "testDescription2", 1234L);
+        Item next = new Item("test2", "testDescription2");
         next.setId(previous.getId());
-        tracker.replace(previous.getId(), next);
-        assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
+        assertThat(tracker.replace(previous.getId(), next), is(true));
     }
 
     /**
-     * Deletes an item.
+     * Changes the item unsuccessfully.
      */
     @Test
-    public void whenDeleteOneItemInMiddle() {
+    public void whenReplaceNameIsUnsuccessfulThenFalse() {
+        Tracker tracker = new Tracker();
+        Item previous = new Item("test1", "testDescription");
+        tracker.add(previous);
+        Item next = new Item("test2", "testDescription2");
+        assertThat(tracker.replace(next.getId(), next), is(false));
+    }
+
+    /**
+     * Deletes an item successfully.
+     */
+    @Test
+    public void whenDeleteItemIsSuccessful() {
         Tracker tracker = new Tracker();
         Item first = new Item();
         tracker.add(first);
@@ -50,12 +61,21 @@ public class TrackerTest {
         tracker.add(second);
         Item third = new Item();
         tracker.add(third);
-        tracker.delete(first.getId());
-        Item[] result = tracker.findAll();
-        Item[] expect = new Item[2];
-        expect[0] = second;
-        expect[1] = third;
-        assertThat(result, is(expect));
+        assertThat(tracker.delete(first.getId()), is(true));
+    }
+
+    /**
+     * Deletes an item unsuccessfully.
+     */
+    @Test
+    public void whenDeleteItemIsUnsuccessful() {
+        Tracker tracker = new Tracker();
+        Item first = new Item();
+        tracker.add(first);
+        Item second = new Item();
+        tracker.add(second);
+        Item third = new Item();
+        assertThat(tracker.delete(third.getId()), is(false));
     }
 
     /**

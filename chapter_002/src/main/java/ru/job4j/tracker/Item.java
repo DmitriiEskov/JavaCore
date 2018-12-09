@@ -44,12 +44,11 @@ public class Item {
      * The constructor.
      * @param name - name of an item
      * @param description - description of an item
-     * @param create - time of creating of an item
      */
-    public Item(String name, String description, long create) {
+    public Item(String name, String description) {
         this.name = name;
         this.description = description;
-        this.create = create;
+        this.create = System.currentTimeMillis();
     }
 
     /**
