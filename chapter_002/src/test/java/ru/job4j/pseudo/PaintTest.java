@@ -1,5 +1,7 @@
 package ru.job4j.pseudo;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -16,13 +18,36 @@ import static org.junit.Assert.assertThat;
 public class PaintTest {
 
     /**
+     * The default output to the console.
+     */
+    private final PrintStream stdout = System.out;
+
+    /**
+     * The buffer for a result.
+     */
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    /**
+     * Reassigns the output stream.
+     */
+    @Before
+    public void loadOutput() {
+        System.setOut(new PrintStream(this.out));
+    }
+
+    /**
+     * Reassigns the output stream back.
+     */
+    @After
+    public void backOutput() {
+        System.setOut(stdout);
+    }
+
+    /**
      * Tests when we a square needs to be drawn.
      */
     @Test
     public void whenDrawSquare() {
-        PrintStream stdout = System.out;
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
         new Paint().draw(new Square());
         assertThat(
                 new String(out.toByteArray()),
@@ -36,17 +61,13 @@ public class PaintTest {
                                 .toString()
                 )
         );
-        System.setOut(stdout);
     }
 
     /**
-     * Tests when we a square needs to be drawn.
+     * Tests when a triangle needs to be drawn.
      */
     @Test
     public void whenDrawTriangle() {
-        PrintStream stdout = System.out;
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
         new Paint().draw(new Triangle());
         assertThat(
                 new String(out.toByteArray()),
@@ -60,6 +81,5 @@ public class PaintTest {
                                  .toString()
                 )
         );
-        System.setOut(stdout);
     }
 }
