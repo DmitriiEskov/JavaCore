@@ -34,7 +34,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.getAll()[0].getName(), is("test name"));
     }
@@ -46,7 +46,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[] {"2", item.getId(), "test replace", "the item was changed", "6"});
+        Input input = new StubInput(new String[] {"2", item.getId(), "test replace", "the item was changed", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
@@ -58,7 +58,7 @@ public class StartUITest {
     public void whenDeleteThenTrackerHasDeletedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("The testing item", "We want it to be deleted."));
-        Input input = new StubInput(new String[] {"3", item.getId(), "6"});
+        Input input = new StubInput(new String[] {"3", item.getId(), "y"});
         new StartUI(input, tracker).init();
         Item result = null;
         assertThat(tracker.findById(item.getId()), is(result));
@@ -71,7 +71,7 @@ public class StartUITest {
     public void whenFindItemByIDThenTrackerFindsIt() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("The testing item", "We want it to be found."));
-        Input input = new StubInput(new String[] {"4", item.getId(), "6"});
+        Input input = new StubInput(new String[] {"4", item.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()), is(item));
     }
@@ -83,7 +83,7 @@ public class StartUITest {
     public void whenFindItemByNameThenTrackerFindsIt() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Testing name", "We want it to be found by name."));
-        Input input = new StubInput(new String[] {"5", item.getName(), "6"});
+        Input input = new StubInput(new String[] {"5", item.getName(), "y"});
         new StartUI(input, tracker).init();
         Item[] result = new Item[1];
         result[0] = item;
@@ -113,31 +113,21 @@ public class StartUITest {
     public void whenGetAllItems() {
         Tracker tracker = new Tracker();
         Item first = tracker.add(new Item("First", "Testing description."));
-        Input input = new StubInput(new String[] {"1", "6"});
+        Input input = new StubInput(new String[] {"1", "y"});
         new StartUI(input, tracker).init();
         assertThat(new String(this.out.toByteArray()), is(
                         new StringBuilder()
-                                .append("Menu\r\n")
-                                .append("0. Add new Item.\r\n")
-                                .append("1. Show all items.\r\n")
-                                .append("2. Edit item.\r\n")
-                                .append("3. Delete item.\r\n")
-                                .append("4. Find item by an id.\r\n")
-                                .append("5. Find items by a name.\r\n")
-                                .append("6. Exit Programme.\r\n")
+                                .append("0. Add new item\r\n")
+                                .append("1. Show items\r\n")
+                                .append("2. Edit item\r\n")
+                                .append("3. Delete item\r\n")
+                                .append("4. Find item by id\r\n")
+                                .append("5. Find item by name\r\n")
                                 .append("------------ Showing all created items --------------\r\n\r\n")
                                 .append("id: " + first.getId() + "\r\n")
                                 .append("Name: " + first.getName() + "\r\n")
                                 .append("Created: " + first.getCreate() + "\r\n")
                                 .append("Description: " + first.getDescription() + "\r\n" + "\r\n")
-                                .append("Menu" + "\r\n")
-                                .append("0. Add new Item." + "\r\n")
-                                .append("1. Show all items." + "\r\n")
-                                .append("2. Edit item." + "\r\n")
-                                .append("3. Delete item." + "\r\n")
-                                .append("4. Find item by an id." + "\r\n")
-                                .append("5. Find items by a name." + "\r\n")
-                                .append("6. Exit Programme." + "\r\n")
                                 .toString()
                 )
         );
@@ -150,31 +140,21 @@ public class StartUITest {
     public void whenGetItemByName() {
         Tracker tracker = new Tracker();
         Item first = tracker.add(new Item("Second", "Testing description."));
-        Input input = new StubInput(new String[] {"5", first.getName(), "6"});
+        Input input = new StubInput(new String[] {"5", first.getName(), "y"});
         new StartUI(input, tracker).init();
         assertThat(new String(this.out.toByteArray()), is(
                         new StringBuilder()
-                                .append("Menu\r\n")
-                                .append("0. Add new Item.\r\n")
-                                .append("1. Show all items.\r\n")
-                                .append("2. Edit item.\r\n")
-                                .append("3. Delete item.\r\n")
-                                .append("4. Find item by an id.\r\n")
-                                .append("5. Find items by a name.\r\n")
-                                .append("6. Exit Programme.\r\n")
+                                .append("0. Add new item\r\n")
+                                .append("1. Show items\r\n")
+                                .append("2. Edit item\r\n")
+                                .append("3. Delete item\r\n")
+                                .append("4. Find item by id\r\n")
+                                .append("5. Find item by name\r\n")
                                 .append("------------ Success! --------------\r\n")
                                 .append("id: " + first.getId() + "\r\n")
                                 .append("Name: " + first.getName() + "\r\n")
                                 .append("Description: " + first.getDescription() + "\r\n")
                                 .append("Create: " + first.getCreate() + "\r\n" + "\r\n")
-                                .append("Menu" + "\r\n")
-                                .append("0. Add new Item." + "\r\n")
-                                .append("1. Show all items." + "\r\n")
-                                .append("2. Edit item." + "\r\n")
-                                .append("3. Delete item." + "\r\n")
-                                .append("4. Find item by an id." + "\r\n")
-                                .append("5. Find items by a name." + "\r\n")
-                                .append("6. Exit Programme." + "\r\n")
                                 .toString()
                 )
         );
