@@ -53,7 +53,7 @@ public class FindItemByName implements UserAction {
                 System.out.println("id: " + i.getId());
                 System.out.println("Name: " + i.getName());
                 System.out.println("Description: " + i.getDescription());
-                System.out.println("Create: " + i.getCreate());
+                System.out.println("Created: " + i.getCreate());
                 System.out.println();
             }
         } else {

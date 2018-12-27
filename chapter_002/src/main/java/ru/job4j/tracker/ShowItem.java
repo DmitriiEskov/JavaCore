@@ -51,8 +51,8 @@ public class ShowItem implements UserAction {
             System.out.println();
             System.out.println("id: " + i.getId());
             System.out.println("Name: " + i.getName());
-            System.out.println("Created: " + i.getCreate());
             System.out.println("Description: " + i.getDescription());
+            System.out.println("Created: " + i.getCreate());
             System.out.println();
         }
     }

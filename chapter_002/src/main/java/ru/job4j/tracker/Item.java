@@ -90,4 +90,24 @@ public class Item {
     public void setId(String id) {
         this.id = id;
     }
+
+    /**
+     * Returns characteristics of an item.
+     */
+    public String getItemCharacteristics(Item[] items) {
+        StringBuilder item = new StringBuilder();
+        for (Item var : items) {
+            item.append(System.lineSeparator());
+            item.append("id: " + var.getId());
+            item.append(System.lineSeparator());
+            item.append("Name: " + getName());
+            item.append(System.lineSeparator());
+            item.append("Description: " + getDescription());
+            item.append(System.lineSeparator());
+            item.append("Created: " + getCreate());
+            item.append(System.lineSeparator());
+            item.append(System.lineSeparator());
+        }
+        return item.toString();
+    }
 }
