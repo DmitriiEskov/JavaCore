@@ -64,4 +64,23 @@ public class ValidateInputTest {
                 )
         );
     }
+
+    /**
+     * Tests if an incorrect ArrayIndex number was put in.
+     */
+    @Test
+    public void whenInvalidInputSecondCase() {
+        ArrayList<Integer> range = new ArrayList<>();
+        range.add(1);
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"10", "1"})
+        );
+        input.ask("Select: ", range);
+        assertThat(
+                this.mem.toString(),
+                is(
+                        String.format("Please, provide a correct menu number.%n")
+                )
+        );
+    }
 }
