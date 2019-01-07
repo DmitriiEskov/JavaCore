@@ -9,7 +9,29 @@ import java.util.ArrayList;
  * @version 1.0
  * @since 07.01.2019
  */
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
+
+    /**
+     * Any implementation of the Input interface.
+     */
+    private final Input input;
+
+    /**
+     * The constructor.
+     */
+    public ValidateInput(final Input input) {
+        this.input = input;
+    }
+
+    /**
+     * Questions a user and gets their answer.
+     * @param question - a question
+     * @return - a user's answer
+     */
+    @Override
+    public String ask(String question) {
+        return this.input.ask(question);
+    }
 
     /**
      * Questions a user and gets their answer.
@@ -22,7 +44,7 @@ public class ValidateInput extends ConsoleInput {
         int value = -1;
         do {
             try {
-                value = super.ask(question, range);
+                value = this.input.ask(question, range);
                 condition = false;
             } catch (NumberFormatException e) {
                 System.out.println("Please, provide a number.");
