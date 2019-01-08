@@ -7,17 +7,7 @@ package ru.job4j.tracker;
  * @since 26.12.2018
  * @version 1.0
  */
-public class DeleteItem implements UserAction {
-
-    /**
-     * Menu's option.
-     */
-    private int key;
-
-    /**
-     *  Menu's option information.
-     */
-    private String info;
+public class DeleteItem extends BaseAction {
 
     /**
      * The constructor.
@@ -25,17 +15,7 @@ public class DeleteItem implements UserAction {
      * @param info - the info
      */
     public DeleteItem(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    /**
-     * The method returns a menu's option.
-     * @return a menu's option
-     */
-    @Override
-    public int key() {
-        return this.key;
+        super(key, info);
     }
 
     /**
@@ -51,14 +31,5 @@ public class DeleteItem implements UserAction {
         } else {
             System.out.println("------------ Error: id not found! --------------");
         }
-    }
-
-    /**
-     * Menu's option information.
-     * @return the information
-     */
-    @Override
-    public String info() {
-        return this.info;
     }
 }
