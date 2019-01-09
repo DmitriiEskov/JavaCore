@@ -4,11 +4,11 @@ import ru.job4j.puzzle.firuges.Cell;
 import ru.job4j.puzzle.firuges.Figure;
 
 /**
- * Class for logical processes of "Puzzle" game.
+ * //TODO add comments.
  *
- * @author Dmitrii Eskov (eskovdmi@gmail.com)
+ * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
- * @since 27.11.2018
+ * @since 0.1
  */
 public class Logic {
     private final int size;
@@ -37,12 +37,12 @@ public class Logic {
         return rst;
     }
 
-    public boolean isFree(Cell... cells) {
+    public boolean isFree(Cell ... cells) {
         boolean result = cells.length > 0;
         for (Cell cell : cells) {
             if (this.findBy(cell) != -1) {
-                result = false;
-                break;
+               result = false;
+               break;
             }
         }
         return result;
@@ -66,6 +66,19 @@ public class Logic {
         return rst;
     }
 
+    public int[][] convert() {
+        int[][] table = new int[this.size][this.size];
+        for (int row = 0; row != table.length; row++) {
+            for (int cell = 0; cell != table.length; cell++) {
+                int position = this.findBy(new Cell(row, cell));
+                if (position != -1 && this.figures[position].movable()) {
+                    table[row][cell] = 1;
+                }
+            }
+        }
+        return table;
+    }
+	
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
@@ -84,18 +97,5 @@ public class Logic {
             }
         }
         return result;
-    }
-
-    public int[][] convert() {
-        int[][] table = new int[this.size][this.size];
-        for (int row = 0; row != table.length; row++) {
-            for (int cell = 0; cell != table.length; cell++) {
-                int position = this.findBy(new Cell(row, cell));
-                if (position != -1 && this.figures[position].movable()) {
-                    table[row][cell] = 1;
-                }
-            }
-        }
-        return table;
-    }
+    }	
 }
