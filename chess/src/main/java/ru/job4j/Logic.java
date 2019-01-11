@@ -1,9 +1,7 @@
-package ru.job4j.chess;
+package ru.job4j;
 
-import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
-
-import java.util.Optional;
+import ru.job4j.figures.Cell;
+import ru.job4j.figures.Figure;
 
 /**
  * Class for the game logic.

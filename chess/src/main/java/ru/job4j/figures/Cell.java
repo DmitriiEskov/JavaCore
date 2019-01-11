@@ -1,4 +1,4 @@
-package ru.job4j.chess.firuges;
+package ru.job4j.figures;
 
 public enum Cell {
     A1(0, 0), A2(0, 1), A3(0, 2), A4(0, 3), A5(0, 4), A6(0, 5), A7(0, 6), A8(0, 7),

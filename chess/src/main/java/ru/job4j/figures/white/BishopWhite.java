@@ -1,17 +1,17 @@
-package ru.job4j.chess.firuges.white;
+package ru.job4j.figures.white;
 
-import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
+import ru.job4j.figures.Cell;
+import ru.job4j.figures.Figure;
 
 /**
  * @author Dmitrii Eskov
  * @version $Id$
  * @since 10.01.2019
  */
-public class KnightWhite implements Figure {
+public class BishopWhite implements Figure {
     private final Cell position;
 
-    public KnightWhite(final Cell position) {
+    public BishopWhite(final Cell position) {
         this.position = position;
     }
 
@@ -29,6 +29,6 @@ public class KnightWhite implements Figure {
 
     @Override
     public Figure copy(Cell dest) {
-        return new KnightWhite(dest);
+        return new BishopWhite(dest);
     }
 }

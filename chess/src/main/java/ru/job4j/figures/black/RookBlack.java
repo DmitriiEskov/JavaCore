@@ -1,17 +1,17 @@
-package ru.job4j.chess.firuges.white;
+package ru.job4j.figures.black;
 
-import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
+import ru.job4j.figures.Cell;
+import ru.job4j.figures.Figure;
 
 /**
  * @author Dmitrii Eskov
  * @version $Id$
  * @since 10.01.2019
  */
-public class PawnWhite implements Figure {
+public class RookBlack implements Figure {
     private final Cell position;
 
-    public PawnWhite(final Cell position) {
+    public RookBlack(final Cell position) {
         this.position = position;
     }
 
@@ -29,6 +29,6 @@ public class PawnWhite implements Figure {
 
     @Override
     public Figure copy(Cell dest) {
-        return new PawnWhite(dest);
+        return new RookBlack(dest);
     }
 }
