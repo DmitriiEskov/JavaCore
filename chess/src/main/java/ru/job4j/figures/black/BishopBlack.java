@@ -47,10 +47,10 @@ public class BishopBlack implements Figure {
             throw new ImpossibleMoveException("Impossible move");
         }
         Cell[] values = new Cell[Math.abs((dest.x - source.x))];
-        int deltaX = (dest.x - source.x) / Math.abs(dest.x - source.x);
-        int deltaY = (dest.y - source.y) / Math.abs(dest.y - source.y);
+        int deltaX = dest.x - source.x;
+        int deltaY = dest.y - source.y;
         for (int x = 0; x < Math.abs(dest.x - source.x); x++) {
-            values[x] = Cell.values()[source.ordinal() + ((((deltaX + deltaY) == 0) ? 7 : 9) * (x + 1) * deltaX)];
+            values[x] = Cell.values()[source.ordinal() + ((((deltaX + deltaY) == 0) ? 7 : 9) * (x + 1) * deltaX / Math.abs(dest.x - source.x))];
         }
         return values;
     }
@@ -72,22 +72,6 @@ public class BishopBlack implements Figure {
      * @return true/false
      */
     public boolean isDiagonal(Cell source, Cell dest) {
-        boolean condition = false;
-        for (int x = 1; x < 8; x++) {
-            if ((source.x + x) == dest.x && (source.y + x) == dest.y) {
-                condition = true;
-                break;
-            } else if ((source.x - x) == dest.x && (source.y - x) == dest.y) {
-                condition = true;
-                break;
-            } else if ((source.x - x) == dest.x && (source.y + x) == dest.y) {
-                condition = true;
-                break;
-            } else if ((source.x + x) == dest.x && (source.y - x) == dest.y) {
-                condition = true;
-                break;
-            }
-        }
-        return condition;
+        return (Math.abs(dest.x - source.x)) == (Math.abs(dest.y - source.y));
     }
 }

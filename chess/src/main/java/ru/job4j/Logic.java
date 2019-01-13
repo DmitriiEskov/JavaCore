@@ -46,19 +46,19 @@ public class Logic {
      */
     public boolean move(Cell source, Cell dest) throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
         int index = this.findBy(source);
-        if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-            for (Cell cell : steps) {
-                    if (this.findBy(cell) != -1) {
-                        throw new OccupiedWayException("The way is occupied");
-                    }
-            }
-            this.figures[index] = this.figures[index].copy(dest);
-        } else {
+        if (index == -1) {
             throw new FigureNotFoundException("Figure not found");
         }
+        Cell[] steps = this.figures[index].way(source, dest);
+        for (Cell cell : steps) {
+            if (this.findBy(cell) != -1) {
+                throw new OccupiedWayException("The way is occupied");
+            }
+        }
+        this.figures[index] = this.figures[index].copy(dest);
         return true;
     }
+
 
     /**
      * Cleans the chess board.
