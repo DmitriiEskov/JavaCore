@@ -1,7 +1,10 @@
 package ru.job4j.figures.black;
 
+import static org.hamcrest.core.Is.is;
+import org.junit.*;
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.Logic;
 import ru.job4j.figures.*;
 import ru.job4j.figures.white.*;
 
@@ -15,94 +18,100 @@ import ru.job4j.figures.white.*;
 public class BishopBlackTest {
 
     /**
-     * The chess board.
+     * The chess logic.
      */
-    private Board board = new Board();
+    private Logic logic = new Logic();
 
     /**
-     * Adding all figures on the board.
+     * Adding all figures on the logic.
      */
     @Before
     public void fillBoardWithAllFigures() {
-        this.board.add(new RookBlack(Cell.A1));
-        this.board.add(new KnightBlack(Cell.B1));
-        this.board.add(new BishopBlack(Cell.C1));
-        this.board.add(new QeenBlack(Cell.D1));
-        this.board.add(new KingBlack(Cell.E1));
-        this.board.add(new BishopBlack(Cell.F1));
-        this.board.add(new KnightBlack(Cell.G1));
-        this.board.add(new RookBlack(Cell.H1));
+        this.logic.add(new RookBlack(Cell.A1));
+        this.logic.add(new KnightBlack(Cell.B1));
 
-        this.board.add(new PawnBlack(Cell.A2));
-        this.board.add(new PawnBlack(Cell.B2));
-        this.board.add(new PawnBlack(Cell.C2));
-        this.board.add(new PawnBlack(Cell.D2));
-        this.board.add(new PawnBlack(Cell.E2));
-        this.board.add(new PawnBlack(Cell.F2));
-        this.board.add(new PawnBlack(Cell.G2));
-        this.board.add(new PawnBlack(Cell.H2));
+        this.logic.add(new BishopBlack(Cell.E4));
 
-        this.board.add(new RookWhite(Cell.A8));
-        this.board.add(new KnightWhite(Cell.B8));
-        this.board.add(new BishopWhite(Cell.C8));
-        this.board.add(new QeenWhite(Cell.D8));
-        this.board.add(new KingWhite(Cell.E8));
-        this.board.add(new BishopWhite(Cell.F8));
-        this.board.add(new KnightWhite(Cell.G8));
-        this.board.add(new RookWhite(Cell.H8));
+        this.logic.add(new QeenBlack(Cell.D1));
+        this.logic.add(new KingBlack(Cell.E1));
+        this.logic.add(new BishopBlack(Cell.F1));
+        this.logic.add(new KnightBlack(Cell.G1));
+        this.logic.add(new RookBlack(Cell.H1));
 
-        this.board.add(new PawnWhite(Cell.A7));
-        this.board.add(new PawnWhite(Cell.B7));
-        this.board.add(new PawnWhite(Cell.C7));
-        this.board.add(new PawnWhite(Cell.D7));
-        this.board.add(new PawnWhite(Cell.E7));
-        this.board.add(new PawnWhite(Cell.F7));
-        this.board.add(new PawnWhite(Cell.G7));
-        this.board.add(new PawnWhite(Cell.H7));
+        this.logic.add(new PawnBlack(Cell.A2));
+        this.logic.add(new PawnBlack(Cell.B2));
+        this.logic.add(new PawnBlack(Cell.C2));
+        this.logic.add(new PawnBlack(Cell.D2));
+        this.logic.add(new PawnBlack(Cell.E2));
+        this.logic.add(new PawnBlack(Cell.F2));
+        this.logic.add(new PawnBlack(Cell.G2));
+        this.logic.add(new PawnBlack(Cell.H2));
+
+        this.logic.add(new RookWhite(Cell.A8));
+        this.logic.add(new KnightWhite(Cell.B8));
+        this.logic.add(new BishopWhite(Cell.C8));
+        this.logic.add(new QeenWhite(Cell.D8));
+        this.logic.add(new KingWhite(Cell.E8));
+        this.logic.add(new BishopWhite(Cell.F8));
+        this.logic.add(new KnightWhite(Cell.G8));
+        this.logic.add(new RookWhite(Cell.H8));
+
+        this.logic.add(new PawnWhite(Cell.A7));
+        this.logic.add(new PawnWhite(Cell.B7));
+        this.logic.add(new PawnWhite(Cell.C7));
+        this.logic.add(new PawnWhite(Cell.D7));
+        this.logic.add(new PawnWhite(Cell.E7));
+        this.logic.add(new PawnWhite(Cell.F7));
+        this.logic.add(new PawnWhite(Cell.G7));
+        this.logic.add(new PawnWhite(Cell.H7));
     }
 
     /**
-     * When a figure is being moved from C1 to F4.
+     * When a figure is being moved from E4 to G6.
      * delta: ++
      */
     @Test
-    public void whenMovedFromC1toF4() {
-        Figure figure = new BishopBlack(Cell.C1);
-        Board board = new Board();
-        board.add(figure);
-        board.move(Cell.C1, Cell.F4);
+    public void whenMovedFromE4toG6() {
+        boolean result = this.logic.move(Cell.E4, Cell.G6);
+        Assert.assertThat(result, is(true));
     }
 
     /**
-     * When a figure is being moved from H8 to E5.
+     * When a figure is being moved from E4 to D3.
      * delta: --
      */
     @Test
-    public void whenMovedFromH8toE5() {
-        Figure figure = new BishopBlack(Cell.H8);
-        Board board = new Board();
-        board.add(figure);
-        board.move(Cell.H8, Cell.E5);
+    public void whenMovedFromE4toD3() {
+        boolean result = this.logic.move(Cell.E4, Cell.D3);
+        Assert.assertThat(result, is(true));
     }
 
     /**
-     * When a figure is being moved from D5 to E4.
+     * When a figure is being moved from E4 to F3.
      * delta: +-
      */
     @Test
-    public void whenMovedFromD5toE4() {
-        Figure figure = new BishopBlack(Cell.D5);
-        Board board = new Board();
-        board.add(figure);
-        board.move(Cell.D5, Cell.E4);
+    public void whenMovedFromE4toF3() {
+        boolean result = this.logic.move(Cell.E4, Cell.F3);
+        Assert.assertThat(result, is(true));
+    }
+
+    /**
+     * When a figure is being moved from E4 to C6.
+     * delta: -+
+     */
+    @Test
+    public void whenMovedFromE4toC6() {
+        boolean result = this.logic.move(Cell.E4, Cell.C6);
+        Assert.assertThat(result, is(true));
     }
 
     /**
      * When an impossible move.
      */
     @Test (expected = ImpossibleMoveException.class)
-    public void whenImpossibleMoveFromD5toG5() throws ImpossibleMoveException {
-        this.board.move(Cell.C1, Cell.C4);
+    public void whenImpossibleMoveFromE4toE6() throws ImpossibleMoveException {
+        this.logic.move(Cell.E4, Cell.E6);
     }
 
     /**
@@ -110,7 +119,7 @@ public class BishopBlackTest {
      */
     @Test (expected = OccupiedWayException.class)
     public void whenCellIsOccupied() throws OccupiedWayException {
-        this.board.move(Cell.C1, Cell.F4);
+        this.logic.move(Cell.F1, Cell.A6);
     }
 
     /**
@@ -118,6 +127,6 @@ public class BishopBlackTest {
      */
     @Test (expected = FigureNotFoundException.class)
     public void whenFigureNotFound() throws FigureNotFoundException {
-        this.board.move(Cell.F4, Cell.E5);
+        this.logic.move(Cell.F3, Cell.H5);
     }
 }

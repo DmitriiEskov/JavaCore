@@ -42,29 +42,17 @@ public class BishopBlack implements Figure {
      * @throws ImpossibleMoveException - if deltaX or deltaY is divided by 0, then the move is impossible
      */
     @Override
-    public Cell[] way(Cell source, Cell dest) {
-        Cell[] values;
-        try {
-            int deltaX = (dest.x - source.x) / Math.abs(dest.x - source.x);
-            int deltaY = (dest.y - source.y) / Math.abs(dest.y - source.y);
-            int sourceX = source.x;
-            int sourceY = source.y;
-            values = new Cell[Math.abs((dest.x - source.x))];
-            Cell[] cell = Cell.values();
-            for (int x = 0; x < Math.abs((dest.x - source.x)); x++) {
-                for (int value = 0; value < cell.length; value++) {
-                    if (cell[value].x == sourceX + deltaX && cell[value].y == sourceY + deltaY) {
-                        values[x] = cell[value];
-                        sourceX = sourceX + deltaX;
-                        sourceY = sourceY + deltaY;
-                        break;
-                    }
-                }
-            }
-            return values;
-        } catch (ArithmeticException e) {
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
+        if (!this.isDiagonal(source, dest)) {
             throw new ImpossibleMoveException("Impossible move");
         }
+        Cell[] values = new Cell[Math.abs((dest.x - source.x))];
+        int deltaX = (dest.x - source.x) / Math.abs(dest.x - source.x);
+        int deltaY = (dest.y - source.y) / Math.abs(dest.y - source.y);
+        for (int x = 0; x < Math.abs(dest.x - source.x); x++) {
+            values[x] = Cell.values()[source.ordinal() + ((((deltaX + deltaY) == 0) ? 7 : 9) * (x + 1) * deltaX)];
+        }
+        return values;
     }
 
     /**
@@ -75,5 +63,31 @@ public class BishopBlack implements Figure {
     @Override
     public Figure copy(Cell dest) {
         return new BishopBlack(dest);
+    }
+
+    /**
+     * Checks if a figure moving on a diagonal.
+     * @param source - a cell where a figure is now located
+     * @param dest - a cell where a figure is supposed to move to
+     * @return true/false
+     */
+    public boolean isDiagonal(Cell source, Cell dest) {
+        boolean condition = false;
+        for (int x = 1; x < 8; x++) {
+            if ((source.x + x) == dest.x && (source.y + x) == dest.y) {
+                condition = true;
+                break;
+            } else if ((source.x - x) == dest.x && (source.y - x) == dest.y) {
+                condition = true;
+                break;
+            } else if ((source.x - x) == dest.x && (source.y + x) == dest.y) {
+                condition = true;
+                break;
+            } else if ((source.x + x) == dest.x && (source.y - x) == dest.y) {
+                condition = true;
+                break;
+            }
+        }
+        return condition;
     }
 }
