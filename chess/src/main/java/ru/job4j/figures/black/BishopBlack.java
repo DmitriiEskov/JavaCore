@@ -39,7 +39,7 @@ public class BishopBlack implements Figure {
      * @param source - a cell where a figure is now located
      * @param dest - a cell where a figure is supposed to move to
      * @return an array of cells, which a figure is supposed to come through
-     * @throws ImpossibleMoveException - if deltaX or deltaY is divided by 0, then the move is impossible
+     * @throws ImpossibleMoveException
      */
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
@@ -71,7 +71,7 @@ public class BishopBlack implements Figure {
      * @param dest - a cell where a figure is supposed to move to
      * @return true/false
      */
-    public boolean isDiagonal(Cell source, Cell dest) {
+    private boolean isDiagonal(Cell source, Cell dest) {
         return (Math.abs(dest.x - source.x)) == (Math.abs(dest.y - source.y));
     }
 }
