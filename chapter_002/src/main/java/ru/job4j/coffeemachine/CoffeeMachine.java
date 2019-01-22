@@ -19,24 +19,25 @@ public class CoffeeMachine {
      */
     public int[] changes(int value, int price) {
         int change = value - price;
-        int tenRuble = change / 10;
-        int fiveRuble = (change - tenRuble * 10) / 5;
-        int twoRuble = (change - tenRuble * 10 - fiveRuble * 5) / 2;
-        int oneRuble = change - tenRuble * 10 - fiveRuble * 5 - twoRuble * 2;
+        int[] money = {10, 5, 2, 1};
+        int tenRuble = change / money[0];
+        int fiveRuble = (change - tenRuble * money[0]) / money[1];
+        int twoRuble = (change - tenRuble * money[0] - fiveRuble * money[1]) / money[2];
+        int oneRuble = change - tenRuble * money[0] - fiveRuble * money[1] - twoRuble * money[2];
         int sum = tenRuble + fiveRuble + twoRuble + oneRuble;
         int[] result = new int[tenRuble + fiveRuble + twoRuble + oneRuble];
         for (int i = 0; i < sum; i++) {
             if (tenRuble != 0) {
-                result[i] = 10;
+                result[i] = money[0];
                 tenRuble--;
             } else if (fiveRuble != 0) {
-                result[i] = 5;
+                result[i] = money[1];
                 fiveRuble--;
             } else if (twoRuble != 0) {
-                result[i] = 2;
+                result[i] = money[2];
                 twoRuble--;
             } else if (oneRuble != 0) {
-                result[i] = 1;
+                result[i] = money[3];
                 oneRuble--;
             }
         }
