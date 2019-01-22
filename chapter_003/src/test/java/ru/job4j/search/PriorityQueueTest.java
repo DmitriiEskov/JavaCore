@@ -39,4 +39,24 @@ public class PriorityQueueTest {
         Task result = queue.take();
         assertThat(result.getDesc(), is("middle"));
     }
+
+    /**
+     * When it needs to get all the elements.
+     */
+    @Test
+    public void whenHigherPriority4() {
+        PriorityQueue queue = new PriorityQueue();
+        queue.put(new Task("middle2", 5));
+        queue.put(new Task("urgent", 1));
+        queue.put(new Task("middle1", 3));
+        queue.put(new Task("low", 8));
+        Task result = queue.take();
+        assertThat(result.getDesc(), is("urgent"));
+        result = queue.take();
+        assertThat(result.getDesc(), is("middle1"));
+        result = queue.take();
+        assertThat(result.getDesc(), is("middle2"));
+        result = queue.take();
+        assertThat(result.getDesc(), is("low"));
+    }
 }
