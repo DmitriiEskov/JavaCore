@@ -20,25 +20,24 @@ public class CoffeeMachine {
     public int[] changes(int value, int price) {
         int change = value - price;
         int[] money = {10, 5, 2, 1};
-        int tenRuble = change / money[0];
-        int fiveRuble = (change - tenRuble * money[0]) / money[1];
-        int twoRuble = (change - tenRuble * money[0] - fiveRuble * money[1]) / money[2];
-        int oneRuble = change - tenRuble * money[0] - fiveRuble * money[1] - twoRuble * money[2];
-        int sum = tenRuble + fiveRuble + twoRuble + oneRuble;
-        int[] result = new int[tenRuble + fiveRuble + twoRuble + oneRuble];
-        for (int i = 0; i < sum; i++) {
-            if (tenRuble != 0) {
+        int index = change / money[0]
+                + (change % money[0]) / money[1]
+                + ((change % money[0]) % money[1]) / money[2]
+                + ((change % money[0]) % money[1]) % money[2];
+        int[] result = new int[index];
+        for (int i = 0; change != 0; i++) {
+            if (change / money[0] != 0) {
                 result[i] = money[0];
-                tenRuble--;
-            } else if (fiveRuble != 0) {
+                change -= money[0];
+            } else if ((change % money[0]) / money[1] != 0) {
                 result[i] = money[1];
-                fiveRuble--;
-            } else if (twoRuble != 0) {
+                change -= money[1];
+            } else if (((change % money[0]) % money[1]) / money[2] != 0) {
                 result[i] = money[2];
-                twoRuble--;
-            } else if (oneRuble != 0) {
+                change -= money[2];
+            } else if (((change % money[0]) % money[1]) % money[2] != 0) {
                 result[i] = money[3];
-                oneRuble--;
+                change -= money[3];
             }
         }
         return result;
