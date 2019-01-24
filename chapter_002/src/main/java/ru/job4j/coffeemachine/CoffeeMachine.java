@@ -1,5 +1,7 @@
 package ru.job4j.coffeemachine;
 
+import java.util.Arrays;
+
 /**
  * Class for returning the change after a payment for coffee using a coffee machine.
  *
@@ -19,27 +21,17 @@ public class CoffeeMachine {
      */
     public int[] changes(int value, int price) {
         int change = value - price;
-        int[] money = {10, 5, 2, 1};
-        int index = change / money[0]
-                + (change % money[0]) / money[1]
-                + ((change % money[0]) % money[1]) / money[2]
-                + ((change % money[0]) % money[1]) % money[2];
-        int[] result = new int[index];
-        for (int i = 0; change != 0; i++) {
-            if (change / money[0] != 0) {
-                result[i] = money[0];
-                change -= money[0];
-            } else if ((change % money[0]) / money[1] != 0) {
-                result[i] = money[1];
-                change -= money[1];
-            } else if (((change % money[0]) % money[1]) / money[2] != 0) {
-                result[i] = money[2];
-                change -= money[2];
-            } else if (((change % money[0]) % money[1]) % money[2] != 0) {
-                result[i] = money[3];
-                change -= money[3];
+        int[] coins = {1, 2, 5, 10};
+        int index = 0;
+        int[] result = new int[change];
+        int coinsIndex = coins.length - 1;
+        while (change != 0) {
+            while (change - coins[coinsIndex] < 0) {
+                coinsIndex--;
             }
+            change -= coins[coinsIndex];
+            result[index++] = coins[coinsIndex];
         }
-        return result;
+        return Arrays.copyOf(result, index);
     }
 }
