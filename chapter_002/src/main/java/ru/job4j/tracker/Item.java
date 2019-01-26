@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+
 /**
  * Class for creating items.
  *
@@ -94,7 +96,7 @@ public class Item {
     /**
      * Returns characteristics of an item.
      */
-    public String getItemCharacteristics(Item[] items) {
+    public String getItemCharacteristics(ArrayList<Item> items) {
         StringBuilder item = new StringBuilder();
         for (Item var : items) {
             item.append(System.lineSeparator());

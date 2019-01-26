@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -21,7 +24,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription");
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
 
     /**
@@ -124,10 +127,10 @@ public class TrackerTest {
         Item third = new Item();
         tracker.add(third);
         tracker.delete(third.getId());
-        Item[] expect = new Item[2];
-        expect[0] = first;
-        expect[1] = second;
-        Item[] result = tracker.findAll();
+        ArrayList<Item> expect = new ArrayList<Item>();
+        expect.add(first);
+        expect.add(second);
+        ArrayList<Item> result = tracker.findAll();
         assertThat(result, is(expect));
     }
 
@@ -149,10 +152,10 @@ public class TrackerTest {
         Item fourth = new Item();
         tracker.add(fourth);
         fourth.name = "Fourth";
-        Item[] result = tracker.findByName("Second");
-        Item[] expect = new Item[2];
-        expect[0] = second;
-        expect[1] = third;
+        ArrayList<Item> result = tracker.findByName("Second");
+        ArrayList<Item> expect = new ArrayList<>();
+        expect.add(second);
+        expect.add(third);
         assertThat(result, is(expect));
     }
 
@@ -168,11 +171,11 @@ public class TrackerTest {
         tracker.add(second);
         Item third = new Item();
         tracker.add(third);
-        Item[] result = tracker.getAll();
-        Item[] expect = new Item[3];
-        expect[0] = first;
-        expect[1] = second;
-        expect[2] = third;
+        ArrayList<Item> result = tracker.getAll();
+        ArrayList<Item> expect = new ArrayList<Item>();
+        expect.add(first);
+        expect.add(second);
+        expect.add(third);
         assertThat(result, is(expect));
     }
 }

@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -36,7 +38,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.getAll()[0].getName(), is("test name"));
+        assertThat(tracker.getAll().get(0).getName(), is("test name"));
     }
 
     /**
@@ -85,8 +87,8 @@ public class StartUITest {
         Item item = tracker.add(new Item("Testing name", "We want it to be found by name."));
         Input input = new StubInput(new String[] {"5", item.getName(), "y"});
         new StartUI(input, tracker).init();
-        Item[] result = new Item[1];
-        result[0] = item;
+        ArrayList<Item> result = new ArrayList<Item>();
+        result.add(item);
         assertThat(tracker.findByName(item.getName()), is(result));
     }
 

@@ -22,7 +22,7 @@ public class MenuTracker {
     private Tracker tracker;
 
     /**
-     * The array for containing all the options of the Menu.
+     * The list for containing all the options of the Menu.
      */
     private List<UserAction> actions = new ArrayList<>();
 
@@ -139,7 +139,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Showing all created items --------------");
-            Item[] items = tracker.getAll();
+            ArrayList<Item> items = tracker.getAll();
             for (Item i : items) {
                 System.out.println();
                 System.out.println("id: " + i.getId());
@@ -289,8 +289,8 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Write a name of the item: ");
-            Item[] items = tracker.findByName(name);
-            if (items.length != 0) {
+            ArrayList<Item> items = tracker.findByName(name);
+            if (items.size() != 0) {
                 System.out.println("------------ Success! --------------");
                 for (Item i : items) {
                     System.out.println("id: " + i.getId());
