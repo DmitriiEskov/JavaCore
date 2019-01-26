@@ -1,5 +1,6 @@
 package ru.job4j.list;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,5 +34,20 @@ public class ConvertList2Array {
             array[x][y++] = value;
         }
         return array;
+    }
+
+    /**
+     * Converts a list of the int[] type into a List of the Integer type.
+     * @param list - an implementation of the List interface
+     * @return a result List
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int[] x : list) {
+            for (int y : x) {
+                result.add(y);
+            }
+        }
+        return result;
     }
 }

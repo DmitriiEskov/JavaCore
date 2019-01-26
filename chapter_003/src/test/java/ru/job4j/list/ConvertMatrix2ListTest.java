@@ -1,6 +1,8 @@
 package ru.job4j.list;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static org.hamcrest.core.Is.is;
@@ -48,6 +50,45 @@ public class ConvertMatrix2ListTest {
                 1, 2, 5, 0, 3, 4, 113, 31111, 900, 1, 3, 88888, 643, 21, 876, 221
         );
         List<Integer> result = list.toList(input);
+        assertThat(result, is(expect));
+    }
+
+    /**
+     * Tests when List<int[]> list has 2 different arrays and
+     * it is required it to be converted into a List<Integer> list.
+     */
+    @Test
+    public void whenListHasTwoDiffArraysThenListHasOnlyInteger() {
+        List<int[]> test = new ArrayList<int[]>();
+        test.add(new int[] {1, 2});
+        test.add(new int[] {3, 4, 5, 6});
+        ConvertList2Array list = new ConvertList2Array();
+        List<Integer> result = list.convert(test);
+        List<Integer> expect = new ArrayList<>();
+        for (int x = 1; x < 7; x++) {
+            expect.add(x);
+        }
+        assertThat(result, is(expect));
+    }
+
+    /**
+     * Tests when List<int[]> list has 3 different arrays and
+     * it is required it to be converted into a List<Integer> list.
+     */
+    @Test
+    public void whenListHasThreeDiffArraysThenListHasOnlyInteger() {
+        List<int[]> test = new ArrayList<int[]>();
+        test.add(new int[] {1});
+        test.add(new int[] {7, 4});
+        test.add(new int[] {34, 21});
+        ConvertList2Array list = new ConvertList2Array();
+        List<Integer> result = list.convert(test);
+        List<Integer> expect = new ArrayList<>();
+        expect.add(1);
+        expect.add(7);
+        expect.add(4);
+        expect.add(34);
+        expect.add(21);
         assertThat(result, is(expect));
     }
 }
