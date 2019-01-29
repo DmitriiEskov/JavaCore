@@ -7,7 +7,7 @@ package ru.job4j.list;
  * @since 26.01.2019
  * @version 1.0
  */
-public class User {
+public class User implements Comparable<User> {
 
     /**
      * User's id.
@@ -18,6 +18,11 @@ public class User {
      * User's name.
      */
     private String name;
+
+    /**
+     * User's age
+     */
+    private Integer age;
 
     /**
      * User's city.
@@ -34,6 +39,16 @@ public class User {
         this.id = id;
         this.name = name;
         this.city = city;
+    }
+
+    /**
+     * The constructor.
+     * @param name - user's name
+     * @param age - user's age
+     */
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
     }
 
     /**
@@ -58,5 +73,22 @@ public class User {
      */
     public String getCity() {
         return this.city;
+    }
+
+    /**
+     * User's age.
+     * @return an age
+     */
+    public Integer getAge() {
+        return this.age;
+    }
+
+    /**
+     * Compares this.age with User's age
+     * @param o user's age
+     * @return 0 - if they equals, -1 if this.age < o.age, 1 if this.age > o.age
+     */
+    public int compareTo(User o) {
+        return Integer.compare(this.getAge(), o.getAge());
     }
 }
