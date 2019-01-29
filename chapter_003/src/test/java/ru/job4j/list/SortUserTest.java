@@ -33,4 +33,48 @@ public class SortUserTest {
         assertThat(iter.next(), is(second));
         assertThat(iter.next(), is(third));
     }
+
+    /**
+     * Tests when it needs to sort a List<User> by a name length.
+     */
+    @Test
+    public void whenSortByNameLength() {
+        List<User> list = new ArrayList<>();
+        User first = new User("Jack", 15);
+        User second = new User("Peter", 19);
+        User third = new User("Marina", 29);
+        User fourth = new User("Jacks", 23);
+        list.add(second);
+        list.add(first);
+        list.add(third);
+        list.add(fourth);
+        List<User> result = new SortUser().sortNameLength(list);
+        Iterator iter = result.iterator();
+        assertThat(iter.next(), is(first));
+        assertThat(iter.next(), is(second));
+        assertThat(iter.next(), is(fourth));
+        assertThat(iter.next(), is(third));
+    }
+
+    /**
+     * Tests when it needs to sort a List<User> lexicographically by a name and by an age.
+     */
+    @Test
+    public void whenSortByAllFields() {
+        List<User> list = new ArrayList<>();
+        User first = new User("Sergey", 25);
+        User second = new User("Ivan", 30);
+        User third = new User("Sergey", 20);
+        User fourth = new User("Ivan", 25);
+        list.add(second);
+        list.add(first);
+        list.add(third);
+        list.add(fourth);
+        List<User> result = new SortUser().sortByAllFields(list);
+        Iterator iter = result.iterator();
+        assertThat(iter.next(), is(fourth));
+        assertThat(iter.next(), is(second));
+        assertThat(iter.next(), is(third));
+        assertThat(iter.next(), is(first));
+    }
 }
