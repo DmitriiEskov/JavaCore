@@ -47,24 +47,16 @@ public class Account {
      * Sets a new amount of money.
      * @param money - a new amount of money
      */
-    public void setValue(double money) {
+    public void setIncreasedValue(double money) {
         this.value += money;
     }
 
     /**
-     * Transfers the money from this account to another one.
-     * @param dest an account the money to be transferred to
-     * @param amount amount of money
-     * @return true - if success, false - otherwise
+     * Decreases this.value.
+     * @param money - a new amount of money to decrease
      */
-    public boolean transfer(Account dest, double amount) {
-        boolean result = false;
-        if (amount > 0 && amount < this.value && dest != null) {
-            dest.setValue(amount);
-            this.value -= amount;
-            result = true;
-        }
-        return result;
+    public void setDecreasedValue(double money) {
+        this.value -= money;
     }
 
     /**

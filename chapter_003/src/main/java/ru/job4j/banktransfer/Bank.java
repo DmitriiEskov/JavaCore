@@ -29,57 +29,109 @@ public class Bank {
      * @param user a user to be deleted
      */
     public List<Account> deleteUser(User user) {
-        return this.map.remove(user);
+        List<Account> result = null;
+        if (this.map.containsKey(user)) {
+            result = this.map.remove(user);
+        }
+        return result;
     }
 
     /**
      * Adds a new account for a user.
-     * @param user - a user
+     * @param passport - a user's passport
      * @param account - a user's account
      */
-    public void addAccountToUser(User user, Account account) {
-        this.map.get(user).add(account);
+    public void addAccountToUser(String passport, Account account) {
+        Set<User> userSet = this.map.keySet();
+        for (User user : userSet) {
+            if (user.getPassport().equals(passport)) {
+                this.map.get(user).add(account);
+            }
+        }
     }
 
     /**
      * Deletes a user's account.
-     * @param user - a user
+     * @param passport - a user's passport
      * @param account - a user's account
      */
-    public boolean deleteAccountFromUser(User user, Account account) {
-        return this.map.get(user).remove(account);
+    public boolean deleteAccountFromUser(String passport, Account account) {
+        boolean result = false;
+        Set<User> userSet = this.map.keySet();
+        for (User user : userSet) {
+            if (user.getPassport().equals(passport)) {
+                result = this.map.get(user).remove(account);
+            }
+        }
+        return result;
     }
 
     /**
      * Returns all user's accounts.
-     * @param user - a user
+     * @param passport - a user's passport
      * @return a list of user's accounts
      */
-    public List<Account> getUserAccounts(User user) {
-        return this.map.get(user);
+    public List<Account> getUserAccounts(String passport) {
+       List<Account> result = null;
+       Set<User> users = this.map.keySet();
+       for (User user : users) {
+           if (user.getPassport().equals(passport)) {
+               result = this.map.get(user);
+           }
+       }
+       return result;
     }
 
     /**
      * Returns a user's account.
-     * @param user - a user
+     * @param passport - a user's passport
      * @return a user's account
      */
-    private Account getActualAccount(User user, Account account) {
-        List<Account> list = this.map.get(user);
-        return list.get(list.indexOf(account));
+    public Account getActualAccount(String passport, Account account) {
+        Account result = this.findAccountByPassportAndRequisites(passport, account.getRequisites());
+        return result;
+    }
+
+    /**
+     * Finds a specific account by user's passport and requisites of an account.
+     * @param passport - a user's passport
+     * @param requisites - requisites of an account
+     * @return true - if the operation successful, false - otherwise
+     */
+    public Account findAccountByPassportAndRequisites(String passport, String requisites) {
+        Set<User> userSet = this.map.keySet();
+        Account result = null;
+        for (User user : userSet) {
+            if (user.getPassport().equals(passport)) {
+                for (Account account : this.map.get(user)) {
+                    if (account.getRequisites().equals(requisites)) {
+                        result = account;
+                    }
+                }
+
+            }
+        }
+        return result;
     }
 
     /**
      * Transfers money between accounts.
-     * @param user1 - user 1
-     * @param account1 - user 1's account
-     * @param user2 - user 2
-     * @param account2 - user 2's account
+     * @param srcPassport - a source passport
+     * @param srcRequisite - a source requisite
+     * @param destPassport - a destination passport
+     * @param dstRequisite - a destination requisite
      * @param amount - amount of money to be transferred
-     * @return true - if  the transfer successful, false - otherwise
+     * @return true - if the operation successful, false - otherwise
      */
-    public boolean transferMoney(User user1, Account account1, User user2, Account account2, double amount) {
-        return this.map.get(user1).contains(account1) && this.map.get(user2).contains(account2)
-                && this.getActualAccount(user1, account1).transfer(this.getActualAccount(user2, account2), amount);
+    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
+        boolean result = false;
+        Account srcAcc = this.findAccountByPassportAndRequisites(srcPassport, srcRequisite);
+        Account destAcc = this.findAccountByPassportAndRequisites(destPassport, dstRequisite);
+        if (srcAcc != null && srcAcc.getValue() > amount && destAcc != null) {
+            srcAcc.setDecreasedValue(amount);
+            destAcc.setIncreasedValue(amount);
+            result = true;
+        }
+        return result;
     }
 }
