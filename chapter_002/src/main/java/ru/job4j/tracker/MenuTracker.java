@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * Class for making a menu.
@@ -27,14 +28,20 @@ public class MenuTracker {
     private List<UserAction> actions = new ArrayList<>();
 
     /**
+     * The functional interface for operating the output stream.
+     */
+    private final Consumer<String> output;
+
+    /**
      * The constructor.
      *
      * @param input Input's object
      * @param tracker Tracker's object
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     /**
@@ -72,7 +79,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.key() + ". " + action.info());
+                this.output.accept(action.key() + ". " + action.info());
             }
         }
     }
@@ -102,14 +109,14 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Adding new item --------------");
+            MenuTracker.this.output.accept("------------ Adding new item --------------");
             String name = input.ask("Please, provide item name: ");
             String desc = input.ask("Please, provide item description: ");
             Item item = new Item(name, desc);
             tracker.add(item);
-            System.out.println("------------ New Item with id: " + item.getId());
-            System.out.println("------------ New Item with Name: " + item.getName());
-            System.out.println("------------ New Item with Description: " + item.getDescription());
+            MenuTracker.this.output.accept("------------ New Item with id: " + item.getId());
+            MenuTracker.this.output.accept("------------ New Item with Name: " + item.getName());
+            MenuTracker.this.output.accept("------------ New Item with Description: " + item.getDescription());
         }
     }
 
@@ -138,15 +145,13 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Showing all created items --------------");
+            MenuTracker.this.output.accept("------------ Showing all created items --------------");
             ArrayList<Item> items = tracker.getAll();
             for (Item i : items) {
-                System.out.println();
-                System.out.println("id: " + i.getId());
-                System.out.println("Name: " + i.getName());
-                System.out.println("Description: " + i.getDescription());
-                System.out.println("Created: " + i.getCreate());
-                System.out.println();
+                MenuTracker.this.output.accept("id: " + i.getId());
+                MenuTracker.this.output.accept("Name: " + i.getName());
+                MenuTracker.this.output.accept("Description: " + i.getDescription());
+                MenuTracker.this.output.accept("Created: " + i.getCreate());
             }
         }
     }
@@ -176,16 +181,16 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Editing an item --------------");
+            MenuTracker.this.output.accept("------------ Editing an item --------------");
             String id = input.ask("Write id of the item: ");
             String name = input.ask("Write a new name: ");
             String desc = input.ask("Write a new description: ");
             Item item = new Item(name, desc);
             item.setId(id);
             if (tracker.replace(id, item)) {
-                System.out.println("------------ Editing complete --------------");
+                MenuTracker.this.output.accept("------------ Editing complete --------------");
             } else {
-                System.out.println("------------ Error: id not found! --------------");
+                MenuTracker.this.output.accept("------------ Error: id not found! --------------");
             }
         }
     }
@@ -217,9 +222,9 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Write id of the item: ");
             if (tracker.delete(id)) {
-                System.out.println("------------ Deleting complete. ----------------");
+                MenuTracker.this.output.accept("------------ Deleting complete. ----------------");
             } else {
-                System.out.println("------------ Error: id not found! --------------");
+                MenuTracker.this.output.accept("------------ Error: id not found! --------------");
             }
         }
     }
@@ -252,13 +257,13 @@ public class MenuTracker {
             String id = input.ask("Write id of the item: ");
             Item item = tracker.findById(id);
             if (item != null) {
-                System.out.println("------------ Success! --------------");
-                System.out.println("id: " + item.getId());
-                System.out.println("Name: " + item.getName());
-                System.out.println("Description: " + item.getDescription());
-                System.out.println("Create: " + item.getCreate());
+                MenuTracker.this.output.accept("------------ Success! --------------");
+                MenuTracker.this.output.accept("id: " + item.getId());
+                MenuTracker.this.output.accept("Name: " + item.getName());
+                MenuTracker.this.output.accept("Description: " + item.getDescription());
+                MenuTracker.this.output.accept("Create: " + item.getCreate());
             } else {
-                System.out.println("------------ id not found. --------------");
+                MenuTracker.this.output.accept("------------ id not found. --------------");
             }
         }
     }
@@ -291,16 +296,15 @@ public class MenuTracker {
             String name = input.ask("Write a name of the item: ");
             ArrayList<Item> items = tracker.findByName(name);
             if (items.size() != 0) {
-                System.out.println("------------ Success! --------------");
+                MenuTracker.this.output.accept("------------ Success! --------------");
                 for (Item i : items) {
-                    System.out.println("id: " + i.getId());
-                    System.out.println("Name: " + i.getName());
-                    System.out.println("Description: " + i.getDescription());
-                    System.out.println("Created: " + i.getCreate());
-                    System.out.println();
+                    MenuTracker.this.output.accept("id: " + i.getId());
+                    MenuTracker.this.output.accept("Name: " + i.getName());
+                    MenuTracker.this.output.accept("Description: " + i.getDescription());
+                    MenuTracker.this.output.accept("Created: " + i.getCreate());
                 }
             } else {
-                System.out.println("------------ Name not found. --------------");
+                MenuTracker.this.output.accept("------------ Name not found. --------------");
             }
         }
     }

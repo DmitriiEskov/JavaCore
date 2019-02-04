@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * Class for starting the "Tracker" application.
@@ -22,20 +23,26 @@ public class StartUI {
     private Input input;
 
     /**
+     * The functional interface for operating the output stream.
+     */
+    private final Consumer<String> output;
+
+    /**
      * The constructor.
      * @param input - data input
      * @param tracker - data storage
      */
-    public StartUI(Input input, Tracker tracker) {
+    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     /**
      * The main cycle of the programme.
      */
     public void init() {
-        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        MenuTracker menu = new MenuTracker(this.input, this.tracker, this.output);
         ArrayList<Integer> range = new ArrayList<>();
         menu.fillActions();
         for (int i = 0; i < menu.getActionsLength(); i++) {
@@ -47,11 +54,10 @@ public class StartUI {
         } while (!"y".equals(this.input.ask("Exit? (y/n): ")));
     }
 
-
     /**
      * The start of the programme.
      */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
     }
 }
