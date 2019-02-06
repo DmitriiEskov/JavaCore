@@ -22,4 +22,16 @@ public class Profiles {
         List<Address> result = profiles.stream().map(Profile :: getAddress).collect(Collectors.toList());
         return result;
     }
+
+    /**
+     * Returns a unique and sorted list of clients' addresses.
+     * @param profiles - a list of clients' profiles
+     * @return a list of clients' addresses
+     */
+    List<Address> collectUniqueSortedAddress(List<Profile> profiles) {
+        List<Address> result = this.collect(profiles).stream().distinct().sorted(
+                new Address().new CompareByCity()).collect(Collectors.toList()
+        );
+        return result;
+    }
 }
