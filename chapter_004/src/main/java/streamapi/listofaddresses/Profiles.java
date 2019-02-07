@@ -29,8 +29,8 @@ public class Profiles {
      * @return a list of clients' addresses
      */
     List<Address> collectUniqueSortedAddress(List<Profile> profiles) {
-        List<Address> result = this.collect(profiles).stream().distinct().sorted(
-                new Address().new CompareByCity()).collect(Collectors.toList()
+        List<Address> result = this.collect(profiles).stream().sorted(
+                new Address().new CompareByCity()).distinct().collect(Collectors.toList()
         );
         return result;
     }
