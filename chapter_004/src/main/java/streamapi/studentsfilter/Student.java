@@ -15,6 +15,20 @@ public class Student {
     private int score;
 
     /**
+     * Student's surname.
+     */
+    private String surname;
+
+    /**
+     * The constructor.
+     * @param score a student's score
+     */
+    public Student(int score, String surname) {
+        this.score = score;
+        this.surname = surname;
+    }
+
+    /**
      * The constructor.
      * @param score a student's score
      */
@@ -28,5 +42,42 @@ public class Student {
      */
     public int getScore() {
         return this.score;
+    }
+
+    /**
+     * Returns a student's surname.
+     * @return a surname
+     */
+    public String getSurname() {
+        return this.surname;
+    }
+
+    /**
+     * Overriding equals to compare a surname field of a Student to another one.
+     * @param o - address to compare with
+     * @return true/false
+     */
+    @Override
+    public boolean equals(Object o) {
+        boolean result = false;
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof Student) {
+            Student student = (Student) o;
+            if (this.getSurname().equals(student.getSurname())) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Overriding the hashcode method using a surname field.
+     * @return hashcode
+     */
+    @Override
+    public int hashCode() {
+        return this.surname.hashCode();
     }
 }
