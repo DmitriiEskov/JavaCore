@@ -1,7 +1,6 @@
 package ru.job4j.banktransfer;
 
 import org.junit.Test;
-
 import java.util.ArrayList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
@@ -99,7 +98,6 @@ public class BankTest {
         Bank bank = new Bank();
         User first = new User("Peter", "4123");
         bank.deleteUser(first);
-        assertNull(bank.deleteUser(first));
     }
 
     /**
@@ -143,5 +141,22 @@ public class BankTest {
         bank.addUser(first);
         Account firstAccount = new Account(10000.00, "73298479324");
         assertNull(bank.getActualAccount(first.getPassport(), firstAccount));
+    }
+
+    /**
+     * Tests when it needs to get an actual user account by a passport and requisites.
+     */
+    @Test
+    public void whenFindAccountByPassportAndRequisitesThenSuccess() {
+        Bank bank = new Bank();
+        User first = new User("Peter", "4123");
+        bank.addUser(first);
+        Account firstAccount = new Account(10000.00, "73298479324");
+        Account secondAccount = new Account(20000.00, "83298479324");
+        Account thirdAccount = new Account(30000.00, "93218479324");
+        bank.addAccountToUser(first.getPassport(), firstAccount);
+        bank.addAccountToUser(first.getPassport(), secondAccount);
+        bank.addAccountToUser(first.getPassport(), thirdAccount);
+        assertThat(bank.findAccountByPassportAndRequisites(first.getPassport(), thirdAccount.getRequisites()), is(thirdAccount));
     }
 }

@@ -28,12 +28,8 @@ public class Bank {
      * Deletes a user from this.map
      * @param user a user to be deleted
      */
-    public List<Account> deleteUser(User user) {
-        List<Account> result = null;
-        if (this.map.containsKey(user)) {
-            result = this.map.remove(user);
-        }
-        return result;
+    public void deleteUser(User user) {
+        this.map.remove(user);
     }
 
     /**
@@ -42,13 +38,9 @@ public class Bank {
      * @param account - a user's account
      */
     public void addAccountToUser(String passport, Account account) {
-        Set<User> userSet = this.map.keySet();
-        for (User user : userSet) {
-            if (user.getPassport().equals(passport)) {
-                this.map.get(user).add(account);
-            }
-        }
-    }
+        User user = this.map.keySet().stream().filter(
+                value -> value.getPassport().equals(passport)).findAny().orElse(null);
+        this.map.get(user).add(account);    }
 
     /**
      * Deletes a user's account.
@@ -56,14 +48,9 @@ public class Bank {
      * @param account - a user's account
      */
     public boolean deleteAccountFromUser(String passport, Account account) {
-        boolean result = false;
-        Set<User> userSet = this.map.keySet();
-        for (User user : userSet) {
-            if (user.getPassport().equals(passport)) {
-                result = this.map.get(user).remove(account);
-            }
-        }
-        return result;
+       return this.map.keySet().stream().anyMatch(
+                user -> user.getPassport().equals(passport) && this.map.get(user).remove(account)
+       );
     }
 
     /**
@@ -72,23 +59,30 @@ public class Bank {
      * @return a list of user's accounts
      */
     public List<Account> getUserAccounts(String passport) {
-       List<Account> result = null;
-       Set<User> users = this.map.keySet();
-       for (User user : users) {
-           if (user.getPassport().equals(passport)) {
-               result = this.map.get(user);
-           }
-       }
-       return result;
+        return this.map.entrySet().stream().filter(
+                user -> user.getKey().getPassport().equals(passport)
+        ).map(
+                Map.Entry :: getValue
+        ).findAny().orElse(null);
     }
 
     /**
      * Returns a user's account.
      * @param passport - a user's passport
      * @return a user's account
+     * @throws ArrayIndexOutOfBoundsException - when object.getValue().indexOf(account) == -1
      */
     public Account getActualAccount(String passport, Account account) {
-        Account result = this.findAccountByPassportAndRequisites(passport, account.getRequisites());
+        Account result = null;
+        try {
+            result = this.map.entrySet().stream().filter(
+                    object -> object.getKey().getPassport().equals(passport)
+            ).map(
+                    object -> object.getValue().get(object.getValue().indexOf(account))
+            ).findAny().orElse(null);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Account not found");
+        }
         return result;
     }
 
@@ -99,19 +93,13 @@ public class Bank {
      * @return true - if the operation successful, false - otherwise
      */
     public Account findAccountByPassportAndRequisites(String passport, String requisites) {
-        Set<User> userSet = this.map.keySet();
-        Account result = null;
-        for (User user : userSet) {
-            if (user.getPassport().equals(passport)) {
-                for (Account account : this.map.get(user)) {
-                    if (account.getRequisites().equals(requisites)) {
-                        result = account;
-                    }
-                }
-
-            }
-        }
-        return result;
+        return this.map.entrySet().stream().filter(
+                e -> e.getKey().getPassport().equals(passport)
+        ).flatMap(
+                e -> e.getValue().stream()
+        ).filter(
+                e -> e.getRequisites().equals(requisites)
+        ).findAny().orElse(null);
     }
 
     /**

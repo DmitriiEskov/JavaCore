@@ -1,7 +1,6 @@
 package ru.job4j.sortdepartments;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class for sorting the names of the departments.
@@ -13,49 +12,85 @@ import java.util.List;
 public class GuideSort {
 
     /**
-     * Sorts a list of GuideSort names lexicographically from low to high.
-     * @param input - a list
-     * @return a sorted list
+     * Contains sorted lexicographically from low to high information of a guide.
      */
-    public List<String> sortByNameLowToHigh(List<String> input) {
-        class CompareDepartsLowToHigh implements Comparator<String> {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
+    private TreeSet<String> tree = new TreeSet<>();
+
+    /**
+     * Adds elements to this.tree.
+     * @param element an element to be added
+     */
+    private void addElementToSet(String element) {
+        String[] elements = element.split("\\\\");
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+        if (elements.length != 0) {
+            result.append(elements[i++]);
+            this.tree.add(result.toString());
+            while (i != elements.length) {
+                result.append("\\" + elements[i++]);
+                this.tree.add(result.toString());
             }
         }
-        input.sort(new CompareDepartsLowToHigh());
-        return input;
     }
 
     /**
-     * Sorts a list of GuideSort names lexicographically from high to low.
-     * @param input - a list
-     * @return a sorted list
+     * Sorts a String array lexicographically from low to high.
+     * @param array - an array to be sorted
+     * @return a sorted array
      */
-    public List<String> sortByNameHighToLow(List<String> input) {
+    public String[] sortByNameLowToHigh(String[] array) {
+        for (String value : array) {
+            this.addElementToSet(value);
+        }
+        String[] result = new String[this.tree.size()];
+        Iterator iter = this.tree.iterator();
+        for (int i = 0; iter.hasNext(); i++) {
+            result[i] = (String) iter.next();
+        }
+        return result;
+    }
+
+    /**
+     * Sorts a String array lexicographically from high to low.
+     * @param array - an array to be sorted
+     * @return a sorted array
+     */
+    public String[] sortByNameHighToLow(String[] array) {
+        for (String value : array) {
+            this.addElementToSet(value);
+        }
+        List<String> list = new ArrayList<>();
+        Iterator setIterator = this.tree.iterator();
+        while (setIterator.hasNext()) {
+            list.add((String) setIterator.next());
+        }
+
+        /**
+         * Class for creating a comparator for comparing two guides lexicographically from high to low.
+         */
         class CompareDepartsHighToLow implements Comparator<String> {
+
+            /**
+             * Compares two String objects.
+             * @param o1 - first sting to compare
+             * @param o2 - second string to compare
+             * @return Positive integer - if second greater that first, negative integer - if second less than first,
+             * zero - if they are equal
+             */
             @Override
             public int compare(String o1, String o2) {
-                char[] v1 = o1.toCharArray();
-                char[] v2 = o2.toCharArray();
-                int len1 = v1.length;
-                int len2 = v2.length;
-                int lim = Math.min(len1, len2);
-
-                int k = 0;
-                while (k < lim) {
-                    char c1 = v1[k];
-                    char c2 = v2[k];
-                    if (c1 != c2) {
-                        return c2 - c1;
-                    }
-                    k++;
-                }
-                return (len1 < len2) ? -1 : 1;
+                int result = o2.compareTo(o1);
+                return (result == o2.length() - o1.length()) ? 1 : result;
             }
         }
-        input.sort(new CompareDepartsHighToLow());
-        return input;
+
+        list.sort(new CompareDepartsHighToLow());
+        Iterator listIterator = list.iterator();
+        String[] result = new String[list.size()];
+        for (int i = 0; listIterator.hasNext(); i++) {
+            result[i] = (String) listIterator.next();
+        }
+        return result;
     }
 }

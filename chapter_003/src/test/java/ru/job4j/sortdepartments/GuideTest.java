@@ -1,8 +1,6 @@
 package ru.job4j.sortdepartments;
 
 import org.junit.Test;
-import java.util.Arrays;
-import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -20,11 +18,14 @@ public class GuideTest {
      */
     @Test
     public void whenSortGuideLowToHighThenSorted() {
-        List<String> listToSort = Arrays.asList("K2\\SK1\\SSK2", "K1\\SK1", "K1\\SK2", "K1\\SK1\\SSK1",
-                "K1\\SK1\\SSK2", "K2\\SK1", "K1", "K2", "K2\\SK1\\SSK1");
-        List<String> expect = (Arrays.asList("K1", "K1\\SK1", "K1\\SK1\\SSK1",
-                "K1\\SK1\\SSK2", "K1\\SK2", "K2", "K2\\SK1", "K2\\SK1\\SSK1", "K2\\SK1\\SSK2"));
-        List<String> result = new GuideSort().sortByNameLowToHigh(listToSort);
+        String[] listToSort = {
+                "K1\\SK1", "K1\\SK2", "K1\\SK1\\SSK1", "K1\\SK1\\SSK2", "K2", "K2\\SK1\\SSK1", "K2\\SK1\\SSK2"
+        };
+        String[] expect = {
+                "K1", "K1\\SK1", "K1\\SK1\\SSK1", "K1\\SK1\\SSK2", "K1\\SK2", "K2", "K2\\SK1", "K2\\SK1\\SSK1",
+                "K2\\SK1\\SSK2"
+        };
+        String[] result = new GuideSort().sortByNameLowToHigh(listToSort);
         assertThat(result, is(expect));
     }
 
@@ -33,11 +34,14 @@ public class GuideTest {
      */
     @Test
     public void whenSortGuideHighToLowThenSorted() {
-        List<String> listToSort = Arrays.asList("K1", "K2", "K2\\SK1\\SSK2", "K1\\SK1", "K1\\SK2", "K1\\SK1\\SSK1",
-                "K1\\SK1\\SSK2", "K2\\SK1", "K2\\SK1\\SSK1");
-        List<String> expect = (Arrays.asList("K2", "K2\\SK1", "K2\\SK1\\SSK2",
-                "K2\\SK1\\SSK1", "K1", "K1\\SK2", "K1\\SK1", "K1\\SK1\\SSK2", "K1\\SK1\\SSK1"));
-        List<String> result = new GuideSort().sortByNameHighToLow(listToSort);
+        String[] listToSort = {
+                "K1\\SK1", "K1\\SK2", "K1\\SK1\\SSK1", "K1\\SK1\\SSK2", "K2", "K2\\SK1\\SSK1", "K2\\SK1\\SSK2"
+        };
+        String[] expect = {
+                "K2", "K2\\SK1", "K2\\SK1\\SSK2",
+                "K2\\SK1\\SSK1", "K1", "K1\\SK2", "K1\\SK1", "K1\\SK1\\SSK2", "K1\\SK1\\SSK1"
+        };
+        String[] result = new GuideSort().sortByNameHighToLow(listToSort);
         assertThat(result, is(expect));
     }
 }
