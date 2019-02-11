@@ -25,23 +25,28 @@ public class GuideTest {
                 "K1", "K1\\SK1", "K1\\SK1\\SSK1", "K1\\SK1\\SSK2", "K1\\SK2", "K2", "K2\\SK1", "K2\\SK1\\SSK1",
                 "K2\\SK1\\SSK2"
         };
-        String[] result = new GuideSort().sortByNameLowToHigh(listToSort);
-        assertThat(result, is(expect));
+        GuideSort test = new GuideSort();
+        for (String value : listToSort) {
+            test.add(value);
+        }
+        assertThat(test.getData(), is(expect));
     }
 
     /**
-     * Tests when it needs to sort a guide from high to low.
+     * Tests when it needs to sort a guide from low to high.
      */
     @Test
-    public void whenSortGuideHighToLowThenSorted() {
+    public void whenDescendingOrderThenSuccess() {
         String[] listToSort = {
                 "K1\\SK1", "K1\\SK2", "K1\\SK1\\SSK1", "K1\\SK1\\SSK2", "K2", "K2\\SK1\\SSK1", "K2\\SK1\\SSK2"
         };
-        String[] expect = {
-                "K2", "K2\\SK1", "K2\\SK1\\SSK2",
-                "K2\\SK1\\SSK1", "K1", "K1\\SK2", "K1\\SK1", "K1\\SK1\\SSK2", "K1\\SK1\\SSK1"
+        String[] expect = {"K2", "K2\\SK1", "K2\\SK1\\SSK2", "K2\\SK1\\SSK1", "K1", "K1\\SK2", "K1\\SK1",
+                "K1\\SK1\\SSK2", "K1\\SK1\\SSK1"
         };
-        String[] result = new GuideSort().sortByNameHighToLow(listToSort);
-        assertThat(result, is(expect));
+        GuideSort test = new GuideSort();
+        for (String value : listToSort) {
+            test.add(value);
+        }
+        assertThat(test.getDescendingData(), is(expect));
     }
 }
