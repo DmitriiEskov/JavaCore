@@ -69,7 +69,7 @@ public class Account {
         boolean result = false;
         if (anObject instanceof Account) {
             Account account = (Account) anObject;
-            if (this.getRequisites().equals(account.getRequisites()) && this.getValue() == account.getValue()) {
+            if (this.getRequisites().equals(account.getRequisites())) {
                 result = true;
             }
         }

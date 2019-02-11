@@ -17,11 +17,15 @@ public class Bank {
     private Map<User, List<Account>> map = new TreeMap<>();
 
     /**
-     * Add a new user to this.map
+     * Adds a new user to this.map
      * @param user a new user
      */
-    public void addUser(User user) {
-        this.map.put(user, new ArrayList<>());
+    public boolean addUser(User user) {
+        boolean result = false;
+        if (user != null) {
+            result = this.map.putIfAbsent(user, new ArrayList<>()) == null;
+        }
+       return result;
     }
 
     /**
@@ -33,14 +37,18 @@ public class Bank {
     }
 
     /**
-     * Adds a new account for a user.
-     * @param passport - a user's passport
-     * @param account - a user's account
+     * @param passport a user's passport
+     * @param account a user's account
+     * @return true - if the user exists and the account to be added is unique, false - otherwise
      */
-    public void addAccountToUser(String passport, Account account) {
+    public boolean addAccountToUser(String passport, Account account) {
         User user = this.map.keySet().stream().filter(
-                value -> value.getPassport().equals(passport)).findAny().orElse(null);
-        this.map.get(user).add(account);    }
+                value -> value.getPassport().equals(passport) && this.map.get(value).stream().noneMatch(
+                        e -> e.equals(account)
+                )
+        ).findAny().orElse(null);
+        return user != null && this.map.get(user).add(account);
+    }
 
     /**
      * Deletes a user's account.
@@ -48,9 +56,16 @@ public class Bank {
      * @param account - a user's account
      */
     public boolean deleteAccountFromUser(String passport, Account account) {
-       return this.map.keySet().stream().anyMatch(
-                user -> user.getPassport().equals(passport) && this.map.get(user).remove(account)
-       );
+        User user = this.map.keySet().stream().filter(
+                e -> e.getPassport().equals(passport)
+        ).findAny().orElse(null);
+        Account accountToDelete = null;
+        if (user != null) {
+            accountToDelete = this.map.get(user).stream().filter(
+                    e -> e.equals(account)
+            ).findAny().orElse(null);
+        }
+        return accountToDelete != null && this.map.get(user).remove(accountToDelete);
     }
 
     /**
@@ -74,14 +89,13 @@ public class Bank {
      */
     public Account getActualAccount(String passport, Account account) {
         Account result = null;
-        try {
-            result = this.map.entrySet().stream().filter(
-                    object -> object.getKey().getPassport().equals(passport)
-            ).map(
-                    object -> object.getValue().get(object.getValue().indexOf(account))
+        User user = this.map.keySet().stream().filter(
+                e -> e.getPassport().equals(passport)
+        ).findAny().orElse(null);
+        if (user != null) {
+            result = this.map.get(user).stream().filter(
+                    e -> e.equals(account)
             ).findAny().orElse(null);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Account not found");
         }
         return result;
     }

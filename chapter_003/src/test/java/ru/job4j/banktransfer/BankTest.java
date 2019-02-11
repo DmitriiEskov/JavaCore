@@ -57,11 +57,48 @@ public class BankTest {
     @Test
     public void whenToDeleteUserAccountThenSuccess() {
         Bank bank = new Bank();
-        User first = new User("Peter", "4123");
+        User first = new User("Peter", "1234123");
+        User second = new User("Dima", "212345");
+        User third = new User("Ivan", "21263");
+        User fourth = new User("Vlad", "51823");
         bank.addUser(first);
+        bank.addUser(second);
+        bank.addUser(third);
+        bank.addUser(fourth);
         Account firstAcc = new Account(10000.00, "73298479324");
+        Account secondAcc = new Account(20000.00, "63298479324");
+        Account thirdAcc = new Account(30000.00, "83298479324");
+        Account fourthAcc = new Account(10000.00, "93298479324");
         bank.addAccountToUser(first.getPassport(), firstAcc);
-        assertThat(bank.deleteAccountFromUser(first.getPassport(), firstAcc), is(true));
+        bank.addAccountToUser(second.getPassport(), secondAcc);
+        bank.addAccountToUser(third.getPassport(), thirdAcc);
+        bank.addAccountToUser(fourth.getPassport(), fourthAcc);
+        assertThat(bank.deleteAccountFromUser(third.getPassport(), thirdAcc), is(true));
+    }
+
+    /**
+     * Tests when it needs to delete a user's account.
+     */
+    @Test
+    public void whenToDeleteUserAccountThenFail() {
+        Bank bank = new Bank();
+        User first = new User("Peter", "1234123");
+        User second = new User("Dima", "010346");
+        User third = new User("Jack", "212345");
+        User fourth = new User("Vlad", "51823");
+        bank.addUser(first);
+        bank.addUser(third);
+        bank.addUser(fourth);
+        Account firstAcc = new Account(10000.00, "73298479324");
+        Account secondAcc = new Account(20000.00, "63298479324");
+        Account thirdAcc = new Account(200400.00, "13298479324");
+        Account fourthAcc = new Account(10000.00, "93298479324");
+        bank.addAccountToUser(first.getPassport(), firstAcc);
+        bank.addAccountToUser(second.getPassport(), secondAcc);
+        bank.addAccountToUser(third.getPassport(), thirdAcc);
+        bank.addAccountToUser(fourth.getPassport(), fourthAcc);
+        assertThat(bank.deleteAccountFromUser(third.getPassport(), fourthAcc), is(false));
+        assertThat(bank.deleteAccountFromUser(second.getPassport(), secondAcc), is(false));
     }
 
     /**
@@ -158,5 +195,58 @@ public class BankTest {
         bank.addAccountToUser(first.getPassport(), secondAccount);
         bank.addAccountToUser(first.getPassport(), thirdAccount);
         assertThat(bank.findAccountByPassportAndRequisites(first.getPassport(), thirdAccount.getRequisites()), is(thirdAccount));
+    }
+
+    /**
+     * When it tries to add a new user to a bank.
+     */
+    @Test
+    public void whenTryToAddNewUserThenSuccess() {
+        Bank bank = new Bank();
+        User first = new User("Peter", "4123");
+        assertThat(bank.addUser(first), is(true));
+    }
+
+    /**
+     * When it tries to add an existing user to a bank.
+     */
+    @Test
+    public void whenTryToAddExistingUserThenFail() {
+        Bank bank = new Bank();
+        User first = new User("Peter", "4123");
+        bank.addUser(first);
+        assertThat(bank.addUser(first), is(false));
+    }
+
+    /**
+     * When it needs to add a new account for a user.
+     */
+    @Test
+    public void whenTryToAddNewAccountForUserThenSuccess() {
+        Bank bank = new Bank();
+        User first = new User("Peter", "4123");
+        bank.addUser(first);
+        boolean result = bank.addAccountToUser(
+                first.getPassport(), new Account(10000.00, "73298479324"
+                )
+        );
+        assertThat(result, is(true));
+    }
+
+    /**
+     * When it needs to add an existing account for a user.
+     */
+    @Test
+    public void whenTryToAddExistingAccountForUserThenFail() {
+        Bank bank = new Bank();
+        User first = new User("Peter", "4123");
+        bank.addUser(first);
+        Account firstAccount = new Account(10000.00, "73298479324");
+        bank.addAccountToUser(first.getPassport(), firstAccount);
+        boolean result = bank.addAccountToUser(
+                first.getPassport(), new Account(10000.00, "73298479324"
+                )
+        );
+        assertThat(result, is(false));
     }
 }
