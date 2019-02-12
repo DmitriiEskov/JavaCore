@@ -89,4 +89,16 @@ public class SchoolTest {
         expect.add(this.school.get(8));
         assertThat(result, is(expect));
     }
+
+    @Test
+    public void whenSortStudentsWithGradeMoreThan52ThenResult() {
+        List<Student> school = this.setSchool();
+        List<Student> result = new School().collect(school, student -> student.getScore() >= 70 && student.getScore() <= 100);
+        List<Student> expect = new ArrayList<>();
+        expect.add(this.school.get(5));
+        expect.add(this.school.get(6));
+        expect.add(this.school.get(7));
+        expect.add(this.school.get(8));
+        assertThat(result, is(expect));
+    }
 }
