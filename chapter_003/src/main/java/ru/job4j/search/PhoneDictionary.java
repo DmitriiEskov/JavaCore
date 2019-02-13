@@ -30,7 +30,7 @@ public class PhoneDictionary {
      * @return a list of suitable persons based on the key
      */
     public List<Person> find(String key) {
-        List<Person> result = new ArrayList<>();
+        var result = new ArrayList<Person>();
             for (Person value : this.persons) {
                 if (value.getName().contains(key) || value.getAddress().contains(key)
                         || value.getPhone().contains(key) || value.getSurname().contains(key)) {

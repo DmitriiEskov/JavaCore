@@ -22,8 +22,8 @@ public class PriorityQueue {
      * @param task a task
      */
     public void put(Task task) {
-        ListIterator<Task> iter = tasks.listIterator();
-        boolean condition = true;
+        var iter = tasks.listIterator();
+        var condition = true;
         while (iter.hasNext()) {
             if (task.getPriority() <= iter.next().getPriority()) {
                 iter.previous();

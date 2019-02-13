@@ -18,7 +18,7 @@ public class PriorityQueueTest {
      */
     @Test
     public void whenHigherPriority() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(new Task("low", 5));
         queue.put(new Task("urgent", 1));
         queue.put(new Task("middle", 3));
@@ -31,12 +31,12 @@ public class PriorityQueueTest {
      */
     @Test
     public void whenHigherPriority2() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(new Task("low", 5));
         queue.put(new Task("urgent", 1));
         queue.put(new Task("middle", 3));
         queue.take();
-        Task result = queue.take();
+        var result = queue.take();
         assertThat(result.getDesc(), is("middle"));
     }
 
@@ -45,12 +45,12 @@ public class PriorityQueueTest {
      */
     @Test
     public void whenHigherPriority4() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(new Task("middle2", 5));
         queue.put(new Task("urgent", 1));
         queue.put(new Task("middle1", 3));
         queue.put(new Task("low", 8));
-        Task result = queue.take();
+        var result = queue.take();
         assertThat(result.getDesc(), is("urgent"));
         result = queue.take();
         assertThat(result.getDesc(), is("middle1"));
