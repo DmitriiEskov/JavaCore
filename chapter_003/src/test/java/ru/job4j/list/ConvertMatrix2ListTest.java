@@ -64,10 +64,7 @@ public class ConvertMatrix2ListTest {
         test.add(new int[] {3, 4, 5, 6});
         ConvertList2Array list = new ConvertList2Array();
         List<Integer> result = list.convert(test);
-        List<Integer> expect = new ArrayList<>();
-        for (int x = 1; x < 7; x++) {
-            expect.add(x);
-        }
+        List<Integer> expect = List.of(1, 2, 3, 4, 5, 6);
         assertThat(result, is(expect));
     }
 
@@ -83,12 +80,7 @@ public class ConvertMatrix2ListTest {
         test.add(new int[] {34, 21});
         ConvertList2Array list = new ConvertList2Array();
         List<Integer> result = list.convert(test);
-        List<Integer> expect = new ArrayList<>();
-        expect.add(1);
-        expect.add(7);
-        expect.add(4);
-        expect.add(34);
-        expect.add(21);
+        List<Integer> expect = List.of(1, 7, 4, 34, 21);
         assertThat(result, is(expect));
     }
 }

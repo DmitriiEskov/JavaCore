@@ -1,7 +1,7 @@
 package ru.job4j.banktransfer;
 
 import org.junit.Test;
-import java.util.ArrayList;
+import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
@@ -149,9 +149,7 @@ public class BankTest {
         Account secondAccount = new Account(20000.00, "8453045");
         bank.addAccountToUser(first.getPassport(), firstAccount);
         bank.addAccountToUser(first.getPassport(), secondAccount);
-        ArrayList<Account> expect = new ArrayList<>();
-        expect.add(firstAccount);
-        expect.add(secondAccount);
+        List<Account> expect = List.of(firstAccount, secondAccount);
         assertThat(bank.getUserAccounts(first.getPassport()).containsAll(expect), is(true));
     }
 

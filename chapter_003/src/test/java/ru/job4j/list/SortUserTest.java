@@ -20,18 +20,12 @@ public class SortUserTest {
      */
     @Test
     public void whenListUserThenSetUser() {
-        List<User> list = new ArrayList<>();
-        User first = new User("Jack", 15);
-        User second = new User("Peter", 19);
-        User third = new User("Marina", 29);
-        list.add(second);
-        list.add(first);
-        list.add(third);
+        List<User> list = List.of(new User("Jack", 15), new User("Peter", 19), new User("Marina", 29));
         Set<User> result = new SortUser().sort(list);
         Iterator iter = result.iterator();
-        assertThat(iter.next(), is(first));
-        assertThat(iter.next(), is(second));
-        assertThat(iter.next(), is(third));
+        assertThat(iter.next(), is(list.get(0)));
+        assertThat(iter.next(), is(list.get(1)));
+        assertThat(iter.next(), is(list.get(2)));
     }
 
     /**

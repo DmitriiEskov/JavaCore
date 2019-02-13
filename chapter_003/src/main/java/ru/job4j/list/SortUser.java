@@ -17,7 +17,6 @@ public class SortUser {
      * @return result - a sorted and converted Set
      */
     public Set<User> sort(List<User> list) {
-        Set<User> result = new TreeSet<>();
         return new TreeSet<>(list);
     }
 

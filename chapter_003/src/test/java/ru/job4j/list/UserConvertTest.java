@@ -19,19 +19,13 @@ public class UserConvertTest {
      */
     @Test
     public void whenListThenMap() {
-        List<User> list = new ArrayList<>();
-        User sveta = new User(0, "Sveta", "New York");
-        User roman = new User(51, "Roman", "San Francisco");
-        User peter = new User(55, "Peter", "St Petersburg");
-        list.add(sveta);
-        list.add(roman);
-        list.add(peter);
+        List<User> list = List.of(new User(0, "Sveta", "New York"),
+                new User(51, "Roman", "San Francisco"),
+                new User(55, "Peter", "St Petersburg"));
         UserConvert test = new UserConvert();
-        Map<Integer, User> expect = new HashMap<>();
-        expect.put(0, sveta);
-        expect.put(55, peter);
-        expect.put(51, roman);
         Map<Integer, User> result = test.process(list);
-        assertThat(result, is(expect));
+        assert (result.containsValue(list.get(0)));
+        assert (result.containsValue(list.get(1)));
+        assert (result.containsValue(list.get(2)));
     }
 }
