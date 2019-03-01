@@ -57,6 +57,21 @@ public class DynamicContainerBasedOnLinkedList<E> implements Iterable<E> {
     }
 
     /**
+     * Deletes an element from the container and returns this element.
+     * @return - element with E type
+     */
+    public E delete() {
+        if (this.size == 0) {
+            throw new NoSuchElementException();
+        }
+        E result = this.first.date;
+        this.first = this.first.next;
+        this.size--;
+        this.modeCount--;
+        return result;
+    }
+
+    /**
      * Contains information.
      */
     private static class Node<E> {
@@ -98,7 +113,7 @@ public class DynamicContainerBasedOnLinkedList<E> implements Iterable<E> {
     public Iterator<E> iterator() {
         return new Iterator<E>() {
 
-            private int i;
+            private Node<E> node = first;
 
             private int expectedModeCount = modeCount;
 
@@ -107,7 +122,7 @@ public class DynamicContainerBasedOnLinkedList<E> implements Iterable<E> {
                 if (expectedModeCount != modeCount) {
                     throw new ConcurrentModificationException();
                 }
-                return this.i < size;
+                return this.node.next != null;
             }
 
             @Override
@@ -115,7 +130,9 @@ public class DynamicContainerBasedOnLinkedList<E> implements Iterable<E> {
                 if (!this.hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return get(this.i++);
+                E result = this.node.date;
+                this.node = this.node.next;
+                return result;
             }
         };
     }
