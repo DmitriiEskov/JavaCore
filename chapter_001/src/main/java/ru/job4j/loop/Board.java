@@ -1,7 +1,7 @@
 package ru.job4j.loop;
 
 /**
- * Board.
+ * Class for making a board.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0
@@ -13,14 +13,14 @@ public class Board {
      * Making a board.
      * @param width - width
      * @param height - height
-     * @return String
+     * @return a board
      */
     public String paint(int width, int height) {
         StringBuilder screen = new StringBuilder();
         String ln = System.lineSeparator();
-        for (int index = 0; index <= height; index++) {
-            for (int indexTwo = 0; indexTwo <= width; indexTwo++) {
-                if ((index + indexTwo) % 2 == 0) {
+        for (int i = 0; i <= height; i++) {
+            for (int j = 0; j <= width; j++) {
+                if ((i + j) % 2 == 0) {
                     screen.append("X");
                 } else {
                     screen.append(" ");

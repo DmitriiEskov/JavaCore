@@ -1,21 +1,21 @@
 package ru.job4j.calculator;
 
 /**
- * Calculator
+ * Class for the simple Calculator.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0
  * @since 04.05.2018
  */
 public class Calculator {
+
     /**
-     * double result.
+     * result.
      */
     private double result;
 
     /**
      * add.
-     *
      * @param first  - first
      * @param second - second
      */
@@ -51,8 +51,7 @@ public class Calculator {
     }
 
     /**
-     * getResult.
-     *
+     * getting the result.
      * @return - result
      */
     public double getResult() {

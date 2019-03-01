@@ -1,41 +1,41 @@
 package ru.job4j.converter;
 
 /**
- * Конвертор валюты.
+ * Class for currency converting.
  */
 public class Converter {
 
     /**
-     * Конвертируем рубли в евро.
-     * @param value рубли.
-     * @return Евро.
+     * Converting rubles into euro.
+     * @param value rubles
+     * @return euro
      */
     public double rubleToEuro(double value) {
-        return value / 70;
+        return value / 75;
     }
 
     /**
-     * Конвертируем рубли в доллары.
-     * @param value рубли.
-     * @return Доллары
+     * Converting rubles into dollars.
+     * @param value rubles
+     * @return dollars
      */
     public double rubleToDollar(double value) {
-        return value / 60;
+        return value / 65;
     }
 
     /**
-     * Конвертируем доллары в рубли.
-     * @param value доллары.
-     * @return Рубли
+     * Converting dollars into rubles.
+     * @param value dollars
+     * @return rubles
      */
     public double dollarToRuble(double value) {
         return value * 60;
     }
 
     /**
-     * Конвертируем евро в рубли.
-     * @param value евро.
-     * @return Рубли
+     * Converting euro into rubles.
+     * @param value euro
+     * @return rubles
      */
     public double euroToRuble(double value) {
         return value * 70;

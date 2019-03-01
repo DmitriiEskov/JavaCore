@@ -8,8 +8,13 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Tests for Fit class (ideal weight).
+ *
+ * @author Dmitrii Eskov (eskovdmi@gmail.com)
+ * @version 1.0
+ * @since 01.01.2017
  */
 public class FitTest {
+
     /**
      * Test for calculating a weight of a man.
      */

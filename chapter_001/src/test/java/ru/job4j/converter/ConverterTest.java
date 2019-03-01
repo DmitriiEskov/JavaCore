@@ -4,14 +4,22 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Test for Converter class.
+ *
+ * @author Dmitrii Eskov (eskovdmi@gmail.com)
+ * @version 1.0
+ * @since 06.06.2018
+ */
 public class ConverterTest {
+
     /**
      * Test for conversion of rubles into dollars.
      */
     @Test
     public void when60RublesToDollarThen1() {
         Converter converter = new Converter();
-        double result = converter.rubleToDollar(60);
+        double result = converter.rubleToDollar(65);
         assertThat(result, is(1.0));
     }
 
@@ -21,7 +29,7 @@ public class ConverterTest {
     @Test
     public void when70RublesToEuroThen() {
         Converter converter = new Converter();
-        double result = converter.rubleToEuro(70);
+        double result = converter.rubleToEuro(75);
         assertThat(result, is(1.0));
     }
 

@@ -14,7 +14,6 @@ public class Triangle {
 
     /**
      * Constructor.
-     *
      * @param a - point a
      * @param b - point b
      * @param c - point c
@@ -26,8 +25,7 @@ public class Triangle {
     }
 
     /**
-     * Method for calculating a semi-perimeter.
-     *
+     * Calculating a semi-perimeter.
      * @param ab - distance between a and b
      * @param ac - distance between a and c
      * @param bc - distance between b and c

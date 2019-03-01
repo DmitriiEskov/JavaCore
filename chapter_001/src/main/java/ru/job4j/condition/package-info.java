@@ -1,5 +1,5 @@
 /**
- * Condition.
+ * Class for tasks: DummyBot, Point, Triangle.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0

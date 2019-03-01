@@ -6,13 +6,14 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * CalculatorTests.
+ * Tests for Calculator class.
  *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0
  * @since 04.05.2018
  */
 public class CalculatorTest {
+
     /**
      * Test for addition.
      */

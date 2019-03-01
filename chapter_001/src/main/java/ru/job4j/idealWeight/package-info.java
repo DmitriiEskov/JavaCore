@@ -1,7 +1,7 @@
 /**
- * Programme to calculate ideal weight for men & women.
+ * Ideal weight for men & women.
  *
- * @author Dmitrii Eskov dmitryhope@yahoo.com
+ * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0
  * @since 06.06.2018
  */

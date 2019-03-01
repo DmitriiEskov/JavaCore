@@ -1,6 +1,8 @@
 package ru.job4j.condition;
 
 /**
+ * Class for creating a point with x and y.
+ *
  * @author Dmitrii Eskov (dmitryhope@yahoo.com)
  * @version 1.0
  * @since 07.06.2018
@@ -34,7 +36,6 @@ public class Point {
         Point a = new Point(10, 10);
         Point b = new Point(5, 5);
         double result = a.distanceTo(b);
-        // Расстояние точки А между собой
         double secondResult = a.distanceTo(a);
         System.out.println("Расстояние между точками А и Б равно: " + result);
         System.out.println("Расстояние точки А между собой: " + secondResult);

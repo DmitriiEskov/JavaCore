@@ -1,5 +1,5 @@
 /**
- * Test for Counter, Factorial and Paint.
+ * Tests for Counter, Factorial and Paint.
  *
  * @author Dmitrii Eskov dmitryhope@yahoo.com
  * @version 1.0
