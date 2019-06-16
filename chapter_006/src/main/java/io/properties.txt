@@ -1,0 +1,9 @@
+FirstKEy = FIrstValue SecondKey = SecondVAlue
+ // Comments
+ThirdKey = ThirdValue VALUE
+FourthKey = FourthValue SEVENsKEY=fifthValue
+ // Comments
+ /* commetns
+  comments
+ */
+ASass  ddd    dasdsdsdf ..... dlkdljklSKSS 33948304; == = 12234Key = Fift353hValue
