@@ -1,11 +1,8 @@
 package io;
 
 import org.apache.commons.cli.*;
-
 import java.io.File;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Class for testing the Zip class.
@@ -21,26 +18,8 @@ public class Args {
      * @param source a name of a project's path
      * @return a list of project files, which are supposed to be archived.
      */
-    public List<File> directory(String source) {
-        List<File> result = new LinkedList<>();
-        File root = new File(source);
-        File[] listRoot = root.listFiles();
-        Queue<File> queue = new LinkedList<>();
-        for (File file : listRoot) {
-            queue.offer(file);
-        }
-        while (!queue.isEmpty()) {
-            File file = queue.poll();
-            if (file.isDirectory() && file.list().length != 0) {
-                listRoot = file.listFiles();
-                for (File value : listRoot) {
-                    queue.offer(value);
-                }
-            } else {
-                result.add(file);
-            }
-        }
-        return result;
+    public File directory(String source) {
+        return new File(source);
     }
 
 
@@ -73,13 +52,11 @@ public class Args {
             CommandLine cmd = parser.parse(options, args);
             File source = null;
             File target = null;
-            List<File> files = null;
             List<File> toBeExcluded = null;
             if (cmd.hasOption("d")) {
                 String directorySource = cmd.getOptionValue("d");
                 if (directorySource != null) {
-                    source = new File(directorySource);
-                    files = new Args().directory(source.getPath());
+                    source = new Args().directory(directorySource);
                 }
             }
             if (cmd.hasOption("e")) {
@@ -91,12 +68,11 @@ public class Args {
             if (cmd.hasOption("o")) {
                 String directoryTarget = cmd.getOptionValue("o");
                 if (directoryTarget != null) {
-                    target = new File(directoryTarget);
-                    if (toBeExcluded != null && files != null) {
-                        files.removeAll(toBeExcluded);
-                        new Zip().pack(files, target);
-                    } else if (files != null) {
-                        new Zip().pack(files, target);
+                    target = new Args().output(directoryTarget);
+                    if (toBeExcluded != null) {
+                        new Zip().pack(source, target, toBeExcluded);
+                    } else {
+                        new Zip().pack(source, target);
                     }
                 }
             }
