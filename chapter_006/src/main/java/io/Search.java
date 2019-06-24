@@ -27,15 +27,7 @@ public class Search {
             return new LinkedList<File>();
         }
         List<File> result = new LinkedList<>();
-        String regex = "";
-        StringJoiner joiner = new StringJoiner("|");
-        int i = 0;
-        while (i < exts.size()) {
-            regex = "\\." + exts.get(i);
-            joiner.add(regex);
-            i++;
-        }
-        regex = joiner.toString();
+        String regex = this.getRegex(exts);
         Pattern pattern = Pattern.compile(regex);
         File root = new File(parent);
         File[] listRoot = root.listFiles();
@@ -59,5 +51,21 @@ public class Search {
             }
         }
         return result;
+    }
+
+    /**
+     * Returns a regular expression.
+     */
+    private String getRegex(List<String> exts) {
+        String regex = null;
+        StringJoiner joiner = new StringJoiner("|");
+        int i = 0;
+        while (i < exts.size()) {
+            regex = "\\." + exts.get(i);
+            joiner.add(regex);
+            i++;
+        }
+        regex = joiner.toString();
+        return regex;
     }
 }
