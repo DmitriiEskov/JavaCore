@@ -14,8 +14,8 @@ public class AnalysisTest {
 
     @Test
     public void whenReadFromFileThenSuccess() {
-        Path source  = Paths.get("server.txt");
-        Path target  = Paths.get("target.txt");
+        Path source  = Paths.get("texts/server.txt");
+        Path target  = Paths.get("texts/target.txt");
         new Analysis().unavailable(source.toString(), target.toString());
         String expect = "10:58:01; 10:59:01; 11:01:02; 11:02:02; 00:18:45; 03:15:09; 07:00:09; 10:00:00";
         String result = null;

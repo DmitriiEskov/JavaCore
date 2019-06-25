@@ -90,7 +90,9 @@ public class SearchTest {
         List<File> expect = List.of(file3, file1, file2, file5, file6, file4, file7, file12,
                 file11, file10, file9, file8);
         List<File> result = new Search().files(parent, specifiedTypes);
-        assertThat(result, is(expect));
+        boolean res = true;
+        res = expect.containsAll(result);
+        assertThat(res, is(true));
     }
 
     @Test
@@ -99,7 +101,8 @@ public class SearchTest {
         List<String> specifiedTypes = List.of("xml", "jpeg");
         List<File> expect = List.of(file3, file1, file5, file6, file12, file11, file9);
         List<File> result = new Search().files(parent, specifiedTypes);
-        assertThat(result, is(expect));
+        boolean res = expect.containsAll(result);
+        assertThat(res, is(true));
     }
 
     @Test
@@ -108,7 +111,8 @@ public class SearchTest {
         List<String> specifiedTypes = List.of("txt");
         List<File> expect = List.of(file2, file4, file7, file10, file8);
         List<File> result = new Search().files(parent, specifiedTypes);
-        assertThat(result, is(expect));
+        boolean res = expect.containsAll(result);
+        assertThat(res, is(true));
     }
 
     @Test
@@ -117,7 +121,8 @@ public class SearchTest {
         List<String> specifiedTypes = List.of("xml");
         List<File> expect = List.of(file1, file6, file11, file9);
         List<File> result = new Search().files(parent, specifiedTypes);
-        assertThat(result, is(expect));
+        boolean res = expect.containsAll(result);
+        assertThat(res, is(true));
     }
 
     @Test
@@ -126,7 +131,8 @@ public class SearchTest {
         List<String> specifiedTypes = List.of("jpeg");
         List<File> expect = List.of(file3, file5, file12);
         List<File> result = new Search().files(parent, specifiedTypes);
-        assertThat(result, is(expect));
+        boolean res = expect.containsAll(result);
+        assertThat(res, is(true));
     }
 
     @Test
@@ -135,6 +141,7 @@ public class SearchTest {
         List<String> specifiedTypes = List.of("bmp");
         List<File> expect = List.of();
         List<File> result = new Search().files(parent, specifiedTypes);
-        assertThat(result, is(expect));
+        boolean res = expect.containsAll(result);
+        assertThat(res, is(true));
     }
 }
