@@ -14,7 +14,7 @@ public class ConfigTest {
 
     @Test
     public void whenToReadFromFileThenSuccess() {
-        Config config = new Config("texts/properties.txt");
+        Config config = new Config("src/test/texts/properties.txt");
         config.load();
         Map<String, String> result = config.getResultMap();
         Map<String, String> expect = new HashMap<>();
@@ -35,7 +35,7 @@ public class ConfigTest {
 
     @Test
     public void whenToReadFromEmptyFileThenFail() {
-        Config config = new Config("texts/EmptyProperties.txt");
+        Config config = new Config("src/test/texts/EmptyProperties.txt");
         config.load();
         Map<String, String> result = config.getResultMap();
         Map<String, String> expect = new HashMap<>();

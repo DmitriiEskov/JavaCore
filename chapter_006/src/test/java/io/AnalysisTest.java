@@ -14,12 +14,12 @@ public class AnalysisTest {
 
     @Test
     public void whenReadFromFileThenSuccess() {
-        Path source  = Paths.get("texts/server.txt");
-        Path target  = Paths.get("texts/target.txt");
-        new Analysis().unavailable(source.toString(), target.toString());
+        var source  = getClass().getClassLoader().getResource("server.txt");
+        var target  = getClass().getClassLoader().getResource("target.txt");
+        new Analysis().unavailable(source.getFile(), target.getFile());
         String expect = "10:58:01; 10:59:01; 11:01:02; 11:02:02; 00:18:45; 03:15:09; 07:00:09; 10:00:00";
         String result = null;
-        try (BufferedReader reader = new BufferedReader(new FileReader(target.toString()))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(target.getFile()))) {
             StringBuilder builder = new StringBuilder();
             String str = reader.readLine();
             while (str != null) {
