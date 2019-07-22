@@ -3,7 +3,7 @@ package dbscripts;
 import java.util.List;
 
 /**
- * This class is for executing a task of "DB Scripts" that is contained in the "VulnerabilityScript" class.
+ * This class contains the execution for the problem described in the package-info.
  */
 public class ExecutionPlan {
 

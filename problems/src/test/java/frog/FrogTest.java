@@ -1,4 +1,4 @@
-package tasks;
+package frog;
 
 import org.junit.Test;
 
