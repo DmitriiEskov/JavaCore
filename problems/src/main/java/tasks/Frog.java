@@ -141,17 +141,13 @@ public class Frog {
         for (int i = index; i < 5; i++) {
             if (i == sequences[0] && this.checkStep(current, forward)) {
                 step(step + 1, forward, i, sequences);
-            }
-            if (i == sequences[1] && this.checkStep(current, right2)) {
+            } else if (i == sequences[1] && this.checkStep(current, right2)) {
                 step(step + 1, right2, i, sequences);
-            }
-            if (i == sequences[2] && this.checkStep(current, left2)) {
+            } else if (i == sequences[2] && this.checkStep(current, left2)) {
                 step(step + 1, left2, i, sequences);
-            }
-            if (i == sequences[3] && this.checkStep(current, right1)) {
+            } else if (i == sequences[3] && this.checkStep(current, right1)) {
                 step(step + 1, right1, i, sequences);
-            }
-            if (i == sequences[4] && this.checkStep(current, left1)) {
+            } else if (i == sequences[4] && this.checkStep(current, left1)) {
                 step(step + 1, left1, i, sequences);
             }
         }
