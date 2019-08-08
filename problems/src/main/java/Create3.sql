@@ -13,7 +13,7 @@ price integer
 
 INSERT INTO Type (Name) VALUES ('СЫР'), ('МОЛОКО'), ('МОРОЖЕНОЕ');
 
-INSERT INTO Product (name, type_id, expired_date, price, quantity) VALUES 
+INSERT INTO Product (name, type_id, expired_date, price, quantity) VALUES
 ('Сыр', 1, '2019-09-23', 100, 6),
 ('Сыр2', 1, '2019-10-10', 150, 15),
 ('Сыр3', 1, '2019-12-11', 250, 0),
@@ -23,11 +23,10 @@ INSERT INTO Product (name, type_id, expired_date, price, quantity) VALUES
 ('Мороженое', 3, '2019-09-12', 240, 3),
 ('Мороженое', 3, '2019-12-24', 140, 3);
 
-
-
-
---1
-SELECT * FROM product pr WHERE pr.type_id = 1;
+---1
+SELECT p.*
+FROM Product p, Type t
+WHERE t.name='СЫР' AND t.id=p.type_id;
 
 --2
 SELECT * FROM Product pr WHERE pr.name LIKE '%Мороженое%';
@@ -36,24 +35,22 @@ SELECT * FROM Product pr WHERE pr.name LIKE '%Мороженое%';
 SELECT * FROM Product pr WHERE pr.expired_date BETWEEN '2019-09-01' AND '2019-09-30';
 
 --4
-SELECT * FROM Product pOne 
-INNER JOIN 
+SELECT pOne.* FROM Product pOne
+INNER JOIN
 (
 	SELECT MAX(pr.price) AS price
 	FROM Product pr
-) 
+)
 	pTwo ON pOne.price=pTwo.price;
-	
+
 --5
---выводит все продукты типа сыр
-SELECT * FROM Product WHERE type_id=1;
+SELECT * FROM Product p, Type t WHERE t.Name='МОЛОКО' AND t.id=p.type_id;
 
 --6
---выводит все продукты типа сыр и молоко
-SELECT * FROM Product WHERE type_id=1 OR type_id=2;
+SELECT p.* FROM Product p, Type t WHERE (t.Name='МОЛОКО' OR t.Name='СЫР') AND t.id=p.type_id;
 
 --7
 SELECT * FROM Product WHERE quantity < 10;
 
 --8
-SELECT * FROM Product pr INNER JOIN Type ty ON pr.type_id=ty.id;
+SELECT pr.*, t.name FROM Product pr LEFT JOIN Type t ON pr.type_id=t.id;
